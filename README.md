@@ -10,7 +10,8 @@
 
 ## NOTE TO WINDOWS USERS
 
-Use Powershell/CMD when running the site! The build/dev process does not work on my terminal emulator on Windows 10. :(
+Use Powershell/CMD when running the site!  
+The build/dev process does not work on my terminal emulator on Windows 10. :(
 
 ## 🚀 Quick start
 
