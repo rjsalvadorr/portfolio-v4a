@@ -5,12 +5,12 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsby's blog starter
+  RJ's Portfolio (v4)
 </h1>
 
-Kick off your project with this blog boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## NOTE TO WINDOWS USERS
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+Use Powershell/CMD when running the site! The build/dev process does not work on my terminal emulator on Windows 10. :(
 
 ## 🚀 Quick start
 
