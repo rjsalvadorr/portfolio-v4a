@@ -13,17 +13,17 @@ class BlogIndex extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Homepage" />
         <Link to="/code">
-          <div class="home-link">
+          <div className="home-link">
             <h1>Code</h1>
           </div>
         </Link>
         <Link to="/music">
-          <div class="home-link">
+          <div className="home-link">
             <h1>Music</h1>
           </div>
         </Link>
         <Link to="/artblog">
-          <div class="home-link">
+          <div className="home-link">
             <h1>Art/Blog</h1>
           </div>
         </Link>
