@@ -7,8 +7,6 @@ class Layout extends React.Component {
   render () {
     const {location, title, children} = this.props;
 
-    let header;
-
     // TODO - write util function for deriving section from pathname
     const pathArr = location.pathname.split ('/').filter (function (el) {
       return el;
@@ -30,26 +28,6 @@ class Layout extends React.Component {
       headerTitle = title;
     }
 
-    header = (
-      <h3
-        style={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={headerLink}
-        >
-          {headerTitle}
-        </Link>
-      </h3>
-    );
-
     return (
       <div
         className="main-layout"
@@ -60,7 +38,25 @@ class Layout extends React.Component {
           padding: `${rhythm (1.5)} ${rhythm (3 / 4)}`,
         }}
       >
-        <header>{header}</header>
+        <header>
+          <h3
+            style={{
+              fontFamily: `Montserrat, sans-serif`,
+              marginTop: 0,
+            }}
+          >
+            <Link
+              style={{
+                boxShadow: `none`,
+                textDecoration: `none`,
+                color: `inherit`,
+              }}
+              to={headerLink}
+            >
+              {headerTitle}
+            </Link>
+          </h3>
+        </header>
         <main className="main-layout__content">{children}</main>
         <footer>
           © {new Date ().getFullYear ()}, Built with
