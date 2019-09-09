@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import HomeLayout from "../components/home-layout"
 import SEO from "../components/seo"
+import homeStyles from "../styles/home.module.css"
 
 class BlogIndex extends React.Component {
   render() {
@@ -13,18 +14,18 @@ class BlogIndex extends React.Component {
       <HomeLayout location={this.props.location} title={siteTitle}>
         <SEO title="Homepage" />
         <Link to="/code">
-          <div className="home-link">
-            <h1>Code</h1>
+          <div className="home-link-wrapper">
+            <h1 className={homeStyles.link}>Code</h1>
           </div>
         </Link>
         <Link to="/music">
-          <div className="home-link">
-            <h1>Music</h1>
+          <div className="home-link-wrapper">
+            <h1 className={homeStyles.link}>Music</h1>
           </div>
         </Link>
         <Link to="/artblog">
-          <div className="home-link">
-            <h1>Art/Blog</h1>
+          <div className="home-link-wrapper">
+            <h1 className={homeStyles.link}>Art/Blog</h1>
           </div>
         </Link>
       </HomeLayout>
