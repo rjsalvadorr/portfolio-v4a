@@ -8,7 +8,7 @@ class Layout extends React.Component {
     const {location, title, children} = this.props;
     const rootPath = `${__PATH_PREFIX__}/`;
     let header;
-    console.log (this.props);
+    let footer;
 
     if (location.pathname === rootPath) {
       header = (
@@ -31,6 +31,8 @@ class Layout extends React.Component {
           </Link>
         </h1>
       );
+
+      footer = null;
     } else {
       const pathArr = location.pathname.split ('/').filter (function (el) {
         return el;
@@ -73,9 +75,18 @@ class Layout extends React.Component {
           </Link>
         </h3>
       );
+
+      footer = (
+        <footer>
+          © {new Date ().getFullYear ()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        </footer>
+      );
     }
     return (
       <div
+        className="main-layout"
         style={{
           marginLeft: `auto`,
           marginRight: `auto`,
@@ -85,11 +96,7 @@ class Layout extends React.Component {
       >
         <header>{header}</header>
         <main>{children}</main>
-        <footer>
-          © {new Date ().getFullYear ()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        {footer}
       </div>
     );
   }
