@@ -9,6 +9,7 @@ class Layout extends React.Component {
     const rootPath = `${__PATH_PREFIX__}/`;
     let header;
     let footer;
+    let bg;
 
     if (location.pathname === rootPath) {
       header = (
@@ -33,6 +34,20 @@ class Layout extends React.Component {
       );
 
       footer = null;
+      bg = (
+        <div
+          className="main-layout__background"
+          style={{
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            zIndex: '-1000',
+            width: '100%',
+            height: '100vh',
+            backgroundColor: '#888888',
+          }}
+        />
+      )
     } else {
       const pathArr = location.pathname.split ('/').filter (function (el) {
         return el;
@@ -43,16 +58,14 @@ class Layout extends React.Component {
         section = pathArr[0];
       }
       let pathCount = pathArr.length;
-      
+
       const headerLink = pathCount && pathCount >= 2 ? `/${section}` : `/`;
       let headerTitle = '';
       if (pathCount && pathCount >= 2) {
-        headerTitle = `< ${title} - ${section}`
-      }
-      else if (pathCount && pathCount == 1) {
-        headerTitle = `< ${title} - Home`
-      }
-      else {
+        headerTitle = `< ${title} - ${section}`;
+      } else if (pathCount && pathCount === 1) {
+        headerTitle = `< ${title} - Home`;
+      } else {
         headerTitle = title;
       }
 
@@ -83,7 +96,10 @@ class Layout extends React.Component {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       );
+
+      bg = null;
     }
+
     return (
       <div
         className="main-layout"
@@ -97,6 +113,7 @@ class Layout extends React.Component {
         <header>{header}</header>
         <main>{children}</main>
         {footer}
+        {bg}
       </div>
     );
   }
