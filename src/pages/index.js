@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Layout from "../components/layout"
+import HomeLayout from "../components/home-layout"
 import SEO from "../components/seo"
 
 class BlogIndex extends React.Component {
@@ -10,7 +10,7 @@ class BlogIndex extends React.Component {
     const siteTitle = data.site.siteMetadata.title
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <HomeLayout location={this.props.location} title={siteTitle}>
         <SEO title="Homepage" />
         <Link to="/code">
           <div className="home-link">
@@ -27,7 +27,7 @@ class BlogIndex extends React.Component {
             <h1>Art/Blog</h1>
           </div>
         </Link>
-      </Layout>
+      </HomeLayout>
     )
   }
 }
