@@ -38,7 +38,10 @@ const Bio = () => {
     <div
       style={{
         display: `flex`,
-        marginBottom: rhythm(2.5),
+        marginBottom: rhythm(1.5),
+        borderTop: '1px solid #888888',
+        borderBottom: '1px solid #888888',
+        paddingTop: rhythm(0.75),
       }}
     >
       <Image
@@ -54,14 +57,12 @@ const Bio = () => {
           borderRadius: `50%`,
         }}
       />
-      <p>
-        Written by <strong>{author}</strong>, who devs and plays tunes in Toronto.
-        <br/>
-        <a href={`https://twitter.com/${social.twitter}`}>
-          Tweet at him
-        </a>
+      <p style={{marginBottom: rhythm(0.75)}}>
+        <strong>{author}</strong> devs and plays tunes in Toronto.
         {` `}
-        if you like, or get at him on
+        <a href={`https://twitter.com/${social.twitter}`}>Tweet</a>
+        {` `}
+        at him if you like, or check him out on
         {` `}
         <a href={`https://instagram.com/${social.instagram}`}>
           Instagram.
