@@ -1,6 +1,5 @@
 import React from 'react';
-
-import {rhythm, scale} from '../utils/typography';
+import {rhythm} from '../utils/typography';
 import homeStyles from "../styles/home.module.css"
 
 class HomeLayout extends React.Component {

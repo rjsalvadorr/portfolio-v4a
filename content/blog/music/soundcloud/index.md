@@ -5,6 +5,7 @@ type: link
 category: music
 subtitle: Compositions and recordings
 target_url: https://soundcloud.com/rj-salvador
+thumbnail: ./thumb.jpg
 options:
   - hideDate
 ---

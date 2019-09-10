@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import { rhythm } from "../utils/typography"
 import mainStyles from '../styles/main.module.css';
 
 const PostLinks = ({ posts }) => {
@@ -16,6 +15,21 @@ const PostLinks = ({ posts }) => {
           thumb = (<Img style={{ borderRadius: '4px' }}fluid={thumbFluid} />);
         }
 
+        if(node.frontmatter.type === 'link') {
+          return (
+            <article key={node.fields.slug} className={mainStyles.postArticle}>
+              <a href={node.frontmatter.target_url} target="_blank">
+                <header>
+                  <h2 className={mainStyles.postHeading} >
+                    {title}
+                  </h2>
+                </header>
+                {thumb}
+              </a>
+            </article>
+          )
+        }
+
         return (
           <article key={node.fields.slug} className={mainStyles.postArticle}>
             <header>
@@ -28,7 +42,9 @@ const PostLinks = ({ posts }) => {
                 display: 'block',
               }}>{node.frontmatter.date}</small>
             </header>
-            {thumb}
+            <Link to={node.fields.slug}>
+              {thumb}
+            </Link>
             <section>
               <p
                 dangerouslySetInnerHTML={{

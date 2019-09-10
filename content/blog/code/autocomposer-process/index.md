@@ -4,6 +4,7 @@ subtitle:
 date: 2017-04-30 13:22:43
 type: post
 category: software
+thumbnail: ./thumb.jpg
 ---
 
 Web app that automagically writes music! <!-- more -->

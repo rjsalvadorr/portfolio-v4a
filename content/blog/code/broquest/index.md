@@ -4,6 +4,7 @@ subtitle: Winter 2012 - Summer 2013
 date: 2017-01-08 17:07:17
 type: post
 category: software
+thumbnail: ./thumb.jpg
 options:
   - hideDate
 ---

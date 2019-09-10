@@ -4,6 +4,7 @@ subtitle: Guitar chord diagrams
 date: 2018-09-23 18:02:06
 type: post
 category: software
+thumbnail: ./thumb.jpg
 ---
 
 Around early 2018, I compiled guitar chord diagrams as I studied various chord patterns and inversions. That turned into a huge Visio document, which was irritating to update. I figured that putting it on the web would be a much better idea.
