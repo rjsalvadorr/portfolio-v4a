@@ -3,6 +3,7 @@
   height: 3rem;
   background-color: #000000;
   color: #ffffff;
+  font-family: 'Special Elite', sans-serif;
   position: relative;
 }
 
@@ -25,7 +26,8 @@
 
 .pageName {
   display: inline-block;
-  vertical-align: text-bottom;
+  vertical-align: bottom;
+  font-size: 1.5rem;
 }
 
 .pageNameOpen {
@@ -37,11 +39,13 @@
   top: 2.5rem;
   width: 100%;
   background-color: #000000;
+  padding-top: 0.5rem;
 }
 
 .headerLink {
   width: 100%;
-  padding: 0.33rem 0.5rem;
+  font-size: 1.25rem;
+  padding: 0.33rem 0.75rem;
 }
 
 .headerLink a {
