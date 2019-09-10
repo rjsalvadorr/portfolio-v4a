@@ -25,7 +25,6 @@
 
 .pageName {
   display: inline-block;
-  /* margin-left: 0.25rem; */
   vertical-align: text-bottom;
 }
 
@@ -42,7 +41,6 @@
 
 .headerLink {
   width: 100%;
-  /* background-color: #0000cc; */
   padding: 0.33rem 0.5rem;
 }
 
