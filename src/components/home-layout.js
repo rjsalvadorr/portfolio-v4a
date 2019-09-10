@@ -26,12 +26,7 @@ class HomeLayout extends React.Component {
           }}
         >
           <header>
-            <h1
-              className={homeStyles.title}
-              style={{
-                ...scale (1.5),
-              }}
-            >
+            <h1 className={homeStyles.title}>
               {title}
             </h1>
           </header>

@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { rhythm } from "../utils/typography"
+import mainStyles from '../styles/main.module.css';
 
 const PostLinks = ({ posts }) => {
   return (
@@ -10,17 +11,14 @@ const PostLinks = ({ posts }) => {
         return (
           <article key={node.fields.slug}>
             <header>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+              <h2 className={mainStyles.postHeading} >
+                <Link className={mainStyles.postHeadingLink} to={node.fields.slug}>
                   {title}
                 </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
+              </h2>
+              <small style={{
+                display: 'block',
+              }}>{node.frontmatter.date}</small>
             </header>
             <section>
               <p

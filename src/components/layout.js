@@ -1,6 +1,8 @@
 import React from 'react';
 import {rhythm} from '../utils/typography';
+import {urlToName} from '../utils/mappings';
 import Header from './header';
+import mainStyles from '../styles/main.module.css';
 
 class Layout extends React.Component {
   render () {
@@ -13,11 +15,11 @@ class Layout extends React.Component {
 
     let section = '';
     if (pathArr.length > 0) {
-      section = pathArr[0];
+      section = urlToName[pathArr[0]];
     }
 
     return (
-      <div className="main-layout">
+      <div className={mainStyles.mainLayout}>
         <header>
           <Header pageName={section} />
         </header>

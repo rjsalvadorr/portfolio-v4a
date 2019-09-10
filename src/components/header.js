@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'gatsby';
 import headerStyles from '../styles/header.module.css';
-import {urlToName} from '../utils/mappings';
 import Burger from '../icons/burger';
 
 class Header extends React.Component {
@@ -52,7 +51,7 @@ class Header extends React.Component {
       headerClass = `${headerStyles.header} ${headerStyles.headerOpen}`;
       pageNameClass = headerStyles.pageNameOpen;
       buttonClass = `${headerStyles.headerButton} ${headerStyles.headerButtonOpen}`;
-      buttonFill = "#000000";
+      buttonFill = "#313e5a";
     }
 
     return (
@@ -60,7 +59,7 @@ class Header extends React.Component {
         <div className={buttonClass} onClick={this.toggleHeader}>
           <Burger fill={buttonFill}/>
         </div>
-        <span className={pageNameClass}>{urlToName[this.props.pageName]}</span>
+        <span className={pageNameClass}>{this.props.pageName}</span>
         {menu}
       </div>
     );

@@ -15,17 +15,17 @@ class BlogIndex extends React.Component {
         <SEO title="Homepage" />
         <Link to="/code">
           <div className="home-link-wrapper">
-            <h1 className={homeStyles.link}>Code</h1>
+            <h2 className={homeStyles.link}>Code</h2>
           </div>
         </Link>
         <Link to="/music">
           <div className="home-link-wrapper">
-            <h1 className={homeStyles.link}>Music</h1>
+            <h2 className={homeStyles.link}>Music</h2>
           </div>
         </Link>
         <Link to="/artblog">
           <div className="home-link-wrapper">
-            <h1 className={homeStyles.link}>Art/Blog</h1>
+            <h2 className={homeStyles.link}>Art/Blog</h2>
           </div>
         </Link>
       </HomeLayout>

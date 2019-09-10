@@ -1,0 +1,16 @@
+
+.mainLayout {
+  background-color: #c7c3bb;
+  min-height: 100vh;
+}
+
+.postHeading {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #313e5a;
+}
+
+.postHeadingLink {
+  box-shadow: none;
+  color: inherit;
+}
