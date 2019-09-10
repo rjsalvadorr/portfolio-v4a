@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'gatsby';
 import headerStyles from '../styles/header.module.css';
 import {urlToName} from '../utils/mappings';
+import Burger from '../icons/burger';
 
 class Header extends React.Component {
   constructor (props) {
@@ -18,10 +19,19 @@ class Header extends React.Component {
   render () {
     const isOpen = this.state.open;
     let menu = null;
+    let headerClass = headerStyles.header;
+    let pageNameClass = headerStyles.pageName;
+    let buttonClass = headerStyles.headerButton;
+    let buttonFill = '#ffffff';
 
     if(isOpen) {
       menu = (
         <div className={headerStyles.headerLinks}>
+          <div className={headerStyles.headerLink}>
+            <Link style={{boxShadow: `none`}} to={'/'}>
+              <span>Home</span>
+            </Link>
+          </div>
           <div className={headerStyles.headerLink}>
             <Link style={{boxShadow: `none`}} to={'/code'}>
               <span>Code</span>
@@ -39,12 +49,18 @@ class Header extends React.Component {
           </div>
         </div>
       )
+      headerClass = `${headerStyles.header} ${headerStyles.headerOpen}`;
+      pageNameClass = headerStyles.pageNameOpen;
+      buttonClass = `${headerStyles.headerButton} ${headerStyles.headerButtonOpen}`;
+      buttonFill = "#000000";
     }
 
     return (
-      <div className={headerStyles.header}>
-        <div className={headerStyles.headerButton} onClick={this.toggleHeader}/>
-        <span className={headerStyles.pageName}>{urlToName[this.props.pageName]}</span>
+      <div className={headerClass}>
+        <div className={buttonClass} onClick={this.toggleHeader}>
+          <Burger fill={buttonFill}/>
+        </div>
+        <span className={pageNameClass}>{urlToName[this.props.pageName]}</span>
         {menu}
       </div>
     );
