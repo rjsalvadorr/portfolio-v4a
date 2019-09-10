@@ -4,6 +4,7 @@ subtitle:
 date: 2019-03-24 13:34:57
 type: post
 category: art
+thumbnail: ./thumb.jpg
 ---
 
 Process shots for the Sharingan project  <!-- more --> ([see here](../sharingan/)).

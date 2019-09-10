@@ -4,6 +4,7 @@ subtitle:
 date: 2017-03-29 17:09:42
 type: post
 category: art
+thumbnail: ./thumb.jpg
 ---
 
 I painted these after a vacation to Egypt. The art and architecture of Old Cairo were especially inspiring. <!-- more -->  

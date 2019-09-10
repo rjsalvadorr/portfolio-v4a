@@ -4,6 +4,7 @@ subtitle:
 date: 2017-03-29 17:09:31
 type: post
 category: art
+thumbnail: ./thumb.jpg
 ---
 
 Just a bunch of fun bits from my sketchbooks.  <!-- more -->
