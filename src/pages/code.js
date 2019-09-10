@@ -15,6 +15,9 @@ class BlogIndex extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Software posts" />
+        <p style={{ marginBottom: '3rem' }}>
+          I'm a web developer based in Toronto, with about five years of pro dev experience. So far, my career has been focused on the front-end and making sure that pages work according to visual specs.
+        </p>
         <PostLinks posts={posts} />
         <Bio />
       </Layout>

@@ -15,6 +15,9 @@ class BlogIndex extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Music posts" />
+        <p style={{ marginBottom: '3rem' }}>
+          My main musical weapons are the classical guitar and bass guitar. After dabbling with violin, piano, and cello, I've stuck with classical/flamenco guitar (clips coming soon...)
+        </p>
         <PostLinks posts={posts} />
         <Bio />
       </Layout>

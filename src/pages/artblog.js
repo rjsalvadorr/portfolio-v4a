@@ -15,6 +15,9 @@ class BlogIndex extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Art/blog posts" />
+        <p style={{ marginBottom: '3rem' }}>
+          I focused on visual art in my teen years, only to abandon it after high school. I've rediscovered the joy of painting in 2019, and now I'm playing with acrylic on canvas again.
+        </p>
         <PostLinks posts={posts} />
         <Bio />
       </Layout>
