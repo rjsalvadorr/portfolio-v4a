@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'gatsby';
 import headerStyles from '../styles/header.module.css';
-import Burger from '../icons/burger';
+import Burger from '../assets/burger';
 
 class Header extends React.Component {
   constructor (props) {
@@ -43,7 +43,7 @@ class Header extends React.Component {
           </div>
           <div className={headerStyles.headerLink}>
             <Link style={{boxShadow: `none`}} to={'/artblog'}>
-              <span>Art/Blog</span>
+              <span>Art / Blog</span>
             </Link>
           </div>
         </div>

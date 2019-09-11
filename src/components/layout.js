@@ -24,7 +24,7 @@ class Layout extends React.Component {
           <Header pageName={section} />
         </header>
         <div
-          className="main-layout__wrapper"
+          className={mainStyles.mainLayoutWrapper}
           style={{
             marginLeft: `auto`,
             marginRight: `auto`,

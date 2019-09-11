@@ -2,6 +2,7 @@
   width: 100%;
   height: 3rem;
   background-color: #313e5a;
+  background-image: url("../assets/shley-tree-1.png");
   color: #ffffff;
   font-family: 'Special Elite', sans-serif;
   position: relative;
@@ -18,6 +19,8 @@
   height: 2rem;
   margin: 0.5rem;
   border-radius: 3px;
+  position: relative;
+  z-index: 300;
 }
 
 .headerButtonOpen {
@@ -36,11 +39,12 @@
 
 .headerLinks {
   position: absolute;
-  top: 2.5rem;
+  top: 0;
   width: 100%;
   background-color: #313e5a;
-  padding-top: 0.5rem;
-  z-index: 100;
+  background-image: url("../assets/shley-tree-1.png");
+  padding-top: 3rem;
+  z-index: 0;
 }
 
 .headerLink {

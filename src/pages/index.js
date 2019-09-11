@@ -25,7 +25,7 @@ class BlogIndex extends React.Component {
         </Link>
         <Link to="/artblog">
           <div className="home-link-wrapper">
-            <h2 className={homeStyles.link}>Art/Blog</h2>
+            <h2 className={homeStyles.link}>Art / Blog</h2>
           </div>
         </Link>
       </HomeLayout>

@@ -3,5 +3,5 @@
 export const urlToName = {
   code: 'Code',
   music: 'Music',
-  artblog: 'Art/Blog',
+  artblog: 'Art / Blog',
 };
