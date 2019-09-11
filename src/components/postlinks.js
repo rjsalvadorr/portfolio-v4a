@@ -18,7 +18,7 @@ const PostLinks = ({ posts }) => {
         if(node.frontmatter.type === 'link') {
           return (
             <article key={node.fields.slug} className={mainStyles.postArticle}>
-              <a href={node.frontmatter.target_url} target="_blank">
+              <a href={node.frontmatter.target_url} target="_blank" rel="noopener noreferrer">
                 <header>
                   <h2 className={mainStyles.postHeading} >
                     {title}

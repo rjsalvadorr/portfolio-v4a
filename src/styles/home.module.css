@@ -1,15 +1,15 @@
 .link, .title {
   margin-top: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
 }
 
 .title {
   color: #ffffff;
-  font-size: 3rem;
+  font-size: 3.5rem;
 }
 
 .link {
   color: #c7c3bb;
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
