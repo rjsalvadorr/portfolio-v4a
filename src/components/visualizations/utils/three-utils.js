@@ -157,7 +157,7 @@ const randomizeEvenly = (numPoints, box) => {
   // into even sections using this number.
   const cubedPoints = Math.cbrt(numPoints);
   if (!Number.isInteger(cubedPoints)) {
-    throw "randomizeEvenly() requires a cubic integer (like 8, 27, 64)";
+    throw new Error("randomizeEvenly() requires a cubic integer (like 8, 27, 64)");
   }
 
   const coords = [];

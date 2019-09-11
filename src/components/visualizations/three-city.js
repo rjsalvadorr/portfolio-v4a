@@ -10,21 +10,22 @@ class ThreeCity extends React.Component {
     super (props);
     this.canvasRef = React.createRef ();
     this.renderer = new THREE.WebGLRenderer ({antialias: true});
-    console.log(this.renderer);
   }
 
   render () {
     return (
-      <div className="canvas-wrapper" ref={this.canvasRef} style={{
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        zIndex: -200
-      }}>
-        {this.renderer.domElement[0]}
-      </div>
+      <div
+        className="canvas-wrapper"
+        ref={this.canvasRef}
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          zIndex: -200,
+        }}
+      />
     );
   }
 
@@ -45,13 +46,15 @@ class ThreeCity extends React.Component {
     let scene = new THREE.Scene ();
     let camera = new THREE.PerspectiveCamera (
       45,
-      this.canvasRef.clientWidth / this.canvasRef.clientHeight,
+      this.canvasRef.current.clientWidth / this.canvasRef.current.clientHeight,
       1,
       1000
     );
-    this.renderer.setSize (this.canvasRef.clientWidth, this.canvasRef.clientHeight);
-    // const canvasWrapper = this.canvasRef;
-    // canvasWrapper.appendChild (this.renderer.domElement);
+    this.renderer.setSize (
+      this.canvasRef.current.clientWidth,
+      this.canvasRef.current.clientHeight
+    );
+    this.canvasRef.current.appendChild(this.renderer.domElement);
     let light = new THREE.DirectionalLight ('white', 0.8);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
@@ -127,7 +130,7 @@ class ThreeCity extends React.Component {
       camera.position.set (cameraPos.x, cameraPos.y, cameraPos.z);
       camera.lookAt (newCameraTarget);
     }, 1000 / UPDATES_PER_SECOND);
-    
+
     // Render loop
     const that = this;
     let render = function () {
@@ -140,10 +143,13 @@ class ThreeCity extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
 
-    const canvasElement = this.canvasRef;
+    const canvasElement = this.canvasRef.current;
     function resizeRenderer (evt) {
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
-      this.renderer.setSize (canvasElement.clientWidth, canvasElement.clientHeight);
+      that.renderer.setSize (
+        canvasElement.clientWidth,
+        canvasElement.clientHeight
+      );
       camera.updateProjectionMatrix ();
     }
 
@@ -164,6 +170,10 @@ class ThreeCity extends React.Component {
         }, delay);
       });
     }) ();
+  }
+
+  componentWillUnmount() {
+    this.intervalId = null;
   }
 }
 
