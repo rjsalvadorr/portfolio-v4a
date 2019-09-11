@@ -7,12 +7,12 @@ class Header extends React.Component {
   constructor (props) {
     super (props);
     this.state = {open: false};
-    this.toggleHeader = this.toggleHeader.bind(this);
+    this.toggleHeader = this.toggleHeader.bind (this);
   }
 
-  toggleHeader() {
+  toggleHeader () {
     const openState = this.state.open;
-    this.setState({open: !openState});
+    this.setState ({open: !openState});
   }
 
   render () {
@@ -23,7 +23,7 @@ class Header extends React.Component {
     let buttonClass = headerStyles.headerButton;
     let buttonFill = '#ffffff';
 
-    if(isOpen) {
+    if (isOpen) {
       menu = (
         <div className={headerStyles.headerLinks}>
           <div className={headerStyles.headerLink}>
@@ -47,17 +47,17 @@ class Header extends React.Component {
             </Link>
           </div>
         </div>
-      )
+      );
       headerClass = `${headerStyles.header} ${headerStyles.headerOpen}`;
       pageNameClass = headerStyles.pageNameOpen;
       buttonClass = `${headerStyles.headerButton} ${headerStyles.headerButtonOpen}`;
-      buttonFill = "#313e5a";
+      buttonFill = '#313e5a';
     }
 
     return (
       <div className={headerClass}>
         <div className={buttonClass} onClick={this.toggleHeader}>
-          <Burger fill={buttonFill}/>
+          <Burger fill={buttonFill} />
         </div>
         <span className={pageNameClass}>{this.props.pageName}</span>
         {menu}

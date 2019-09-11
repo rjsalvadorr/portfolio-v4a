@@ -1,6 +1,7 @@
 import React from 'react';
 import {rhythm} from '../utils/typography';
 import homeStyles from "../styles/home.module.css"
+import Visualizations from './visualizations/visualizations';
 
 class HomeLayout extends React.Component {
   render () {
@@ -41,7 +42,9 @@ class HomeLayout extends React.Component {
               height: '100vh',
               backgroundColor: '#888888',
             }}
-          />
+          >
+            <Visualizations />
+          </div>
         </div>
       </div>
     );
