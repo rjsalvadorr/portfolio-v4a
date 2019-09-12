@@ -1,13 +1,13 @@
 
 .mainLayout {
   background-color: #c7c3bb;
+  background-image: url("../assets/asfalt-even-less-dark.png");
   min-height: 100vh;
 }
 
 .mainLayoutWrapper {
   margin-left: auto;
   margin-right: auto;
-  background-image: url("../assets/asfalt-even-less-dark.png");
 }
 
 .postHeading {
