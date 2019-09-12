@@ -21,6 +21,7 @@
   border-radius: 3px;
   position: relative;
   z-index: 300;
+  vertical-align: top;
 }
 
 .headerButtonOpen {
@@ -29,12 +30,11 @@
 
 .pageName {
   display: inline-block;
-  vertical-align: bottom;
-  font-size: 1.5rem;
-}
-
-.pageNameOpen {
-  display: none;
+  padding-top: 0.25rem;
+  padding-left: 0.125rem;
+  font-size: 1.75rem;
+  position: relative;
+  z-index: 300;
 }
 
 .headerLinks {

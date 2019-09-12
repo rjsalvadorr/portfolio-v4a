@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'gatsby';
+import {urlToName} from '../utils/mappings';
 import headerStyles from '../styles/header.module.css';
 import Burger from '../assets/burger';
 
@@ -19,37 +20,50 @@ class Header extends React.Component {
     const isOpen = this.state.open;
     let menu = null;
     let headerClass = headerStyles.header;
-    let pageNameClass = headerStyles.pageName;
     let buttonClass = headerStyles.headerButton;
     let buttonFill = '#ffffff';
+
+    const headerLinks = [
+      {
+        id: 0,
+        section: 'home',
+      },
+      {
+        id: 1,
+        section: 'code',
+      },
+      {
+        id: 2,
+        section: 'music',
+      },
+      {
+        id: 3,
+        section: 'artblog',
+      },
+      {
+        id: 4,
+        section: 'contact',
+      },
+    ];
 
     if (isOpen) {
       menu = (
         <div className={headerStyles.headerLinks}>
-          <div className={headerStyles.headerLink}>
-            <Link style={{boxShadow: `none`}} to={'/'}>
-              <span>Home</span>
-            </Link>
-          </div>
-          <div className={headerStyles.headerLink}>
-            <Link style={{boxShadow: `none`}} to={'/code'}>
-              <span>Code</span>
-            </Link>
-          </div>
-          <div className={headerStyles.headerLink}>
-            <Link style={{boxShadow: `none`}} to={'/music'}>
-              <span>Music</span>
-            </Link>
-          </div>
-          <div className={headerStyles.headerLink}>
-            <Link style={{boxShadow: `none`}} to={'/artblog'}>
-              <span>Art / Blog</span>
-            </Link>
-          </div>
+          {headerLinks.map (link => {
+            const dest = link.section === 'home' ? '/' : `/${link.section}`;
+            if(link.section != this.props.pageName) {
+              return (
+                <div key={link.id} className={headerStyles.headerLink}>
+                  <Link style={{boxShadow: `none`}} to={dest}>
+                    <span>{urlToName[link.section]}</span>
+                  </Link>
+                </div>
+              );
+            }
+          })}
         </div>
       );
       headerClass = `${headerStyles.header} ${headerStyles.headerOpen}`;
-      pageNameClass = headerStyles.pageNameOpen;
       buttonClass = `${headerStyles.headerButton} ${headerStyles.headerButtonOpen}`;
       buttonFill = '#313e5a';
     }
@@ -59,7 +73,7 @@ class Header extends React.Component {
         <div className={buttonClass} onClick={this.toggleHeader}>
           <Burger fill={buttonFill} />
         </div>
-        <span className={pageNameClass}>{this.props.pageName}</span>
+        <span className={headerStyles.pageName}>{urlToName[this.props.pageName]}</span>
         {menu}
       </div>
     );
