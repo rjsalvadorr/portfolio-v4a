@@ -5,6 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostLinks from "../components/postlinks";
+import mainStyles from '../styles/main.module.css';
 
 class CodePage extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class CodePage extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Software posts" />
-        <p style={{ marginBottom: '3rem' }}>
+        <p className={mainStyles.categoryIntro}>
           I'm a web developer based in Toronto, with about five years of pro dev experience. So far, my career has been focused on the front-end and making sure that pages work according to visual specs.
         </p>
         <PostLinks posts={posts} />

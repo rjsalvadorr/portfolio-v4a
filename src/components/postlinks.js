@@ -17,6 +17,7 @@ const PostLinks = ({posts}) => {
               style={{
                 borderRadius: '4px',
                 boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.33)',
+                marginBottom: '0.66rem',
               }}
               fluid={thumbFluid}
             />
@@ -31,7 +32,7 @@ const PostLinks = ({posts}) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <header>
+                <header style={{ marginBottom: '0.2rem' }}>
                   <h2 className={mainStyles.postHeading}>
                     {title}
                   </h2>
@@ -56,6 +57,8 @@ const PostLinks = ({posts}) => {
               <small
                 style={{
                   display: 'block',
+                  marginBottom: '0.2rem',
+                  marginTop: '-0.3rem',
                 }}
               >
                 {node.frontmatter.date}

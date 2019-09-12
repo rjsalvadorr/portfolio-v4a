@@ -22,5 +22,10 @@
 }
 
 .postArticle {
+  margin-bottom: 3.5rem;
+}
+
+.categoryIntro {
+  font-size: 1.1rem;
   margin-bottom: 3rem;
 }
