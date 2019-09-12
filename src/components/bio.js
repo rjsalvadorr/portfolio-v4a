@@ -52,6 +52,7 @@ const Bio = () => {
           marginBottom: 0,
           minWidth: 50,
           borderRadius: `100%`,
+          boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.33)',
         }}
         imgStyle={{
           borderRadius: `50%`,

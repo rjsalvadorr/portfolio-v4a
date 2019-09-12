@@ -6,6 +6,7 @@
   color: #ffffff;
   font-family: 'Special Elite', sans-serif;
   position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .headerOpen {
@@ -21,6 +22,7 @@
   border-radius: 3px;
   position: relative;
   z-index: 300;
+  vertical-align: top;
 }
 
 .headerButtonOpen {
@@ -29,12 +31,11 @@
 
 .pageName {
   display: inline-block;
-  vertical-align: bottom;
-  font-size: 1.5rem;
-}
-
-.pageNameOpen {
-  display: none;
+  padding-top: 0.25rem;
+  padding-left: 0.125rem;
+  font-size: 1.75rem;
+  position: relative;
+  z-index: 300;
 }
 
 .headerLinks {
@@ -45,6 +46,7 @@
   background-image: url("../assets/shley-tree-1.png");
   padding-top: 3rem;
   z-index: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.33);
 }
 
 .headerLink {
