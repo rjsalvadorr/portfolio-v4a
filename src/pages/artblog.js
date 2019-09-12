@@ -5,6 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostLinks from "../components/postlinks";
+import mainStyles from '../styles/main.module.css';
 
 class ArtBlogPage extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class ArtBlogPage extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Art/blog posts" />
-        <p style={{ marginBottom: '3rem' }}>
+        <p className={mainStyles.categoryIntro}>
           I focused on visual art in my teen years, only to abandon it after high school. I've rediscovered the joy of painting in 2019, and now I'm playing with acrylic on canvas again.
         </p>
         <PostLinks posts={posts} />
