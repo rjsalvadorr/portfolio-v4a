@@ -51,7 +51,7 @@ class Header extends React.Component {
         <div className={headerStyles.headerLinks}>
           {headerLinks.map (link => {
             const dest = link.section === 'home' ? '/' : `/${link.section}`;
-            if(link.section != this.props.pageName) {
+            if (link.section != this.props.pageName) {
               return (
                 <div key={link.id} className={headerStyles.headerLink}>
                   <Link style={{boxShadow: `none`}} to={dest}>
@@ -73,7 +73,9 @@ class Header extends React.Component {
         <div className={buttonClass} onClick={this.toggleHeader}>
           <Burger fill={buttonFill} />
         </div>
-        <span className={headerStyles.pageName}>{urlToName[this.props.pageName]}</span>
+        <span className={headerStyles.pageName}>
+          {urlToName[this.props.pageName]}
+        </span>
         {menu}
       </div>
     );

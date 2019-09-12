@@ -6,6 +6,7 @@
   color: #ffffff;
   font-family: 'Special Elite', sans-serif;
   position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .headerOpen {
@@ -45,6 +46,7 @@
   background-image: url("../assets/shley-tree-1.png");
   padding-top: 3rem;
   z-index: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.33);
 }
 
 .headerLink {
