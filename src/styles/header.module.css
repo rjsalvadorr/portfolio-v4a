@@ -33,7 +33,7 @@
   display: inline-block;
   padding-top: 0.25rem;
   padding-left: 0.125rem;
-  font-size: 1.75rem;
+  font-size: 1.66rem;
   position: relative;
   z-index: 300;
 }
@@ -45,7 +45,7 @@
   background-color: #313e5a;
   background-image: url("../assets/shley-tree-1.png");
   padding-top: 3rem;
-  z-index: 0;
+  z-index: 200;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.33);
 }
 

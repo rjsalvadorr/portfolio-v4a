@@ -4,8 +4,9 @@ import { Link, graphql } from "gatsby"
 import HomeLayout from "../components/home-layout"
 import SEO from "../components/seo"
 import homeStyles from "../styles/home.module.css"
+import pages from '../data/pages';
 
-class BlogIndex extends React.Component {
+class HomePage extends React.Component {
   render() {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
@@ -13,27 +14,25 @@ class BlogIndex extends React.Component {
     return (
       <HomeLayout location={this.props.location} title={siteTitle}>
         <SEO title="Homepage" />
-        <Link to="/code">
-          <div className="home-link-wrapper">
-            <h2 className={homeStyles.link}>Code</h2>
-          </div>
-        </Link>
-        <Link to="/music">
-          <div className="home-link-wrapper">
-            <h2 className={homeStyles.link}>Music</h2>
-          </div>
-        </Link>
-        <Link to="/artblog">
-          <div className="home-link-wrapper">
-            <h2 className={homeStyles.link}>Art / Blog</h2>
-          </div>
-        </Link>
+        {pages.map (page => {
+          if (page.section !== 'home') {
+            return (
+              <Link to={page.path}>
+                <div className="home-link-wrapper">
+                  <h2 className={homeStyles.link}>{page.name}</h2>
+                </div>
+              </Link>
+            );
+          } else {
+            return null;
+          }
+        })}
       </HomeLayout>
     )
   }
 }
 
-export default BlogIndex
+export default HomePage
 
 
 export const pageQuery = graphql`
