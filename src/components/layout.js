@@ -2,25 +2,16 @@ import React from 'react';
 import {rhythm} from '../utils/typography';
 import Header from './header';
 import mainStyles from '../styles/main.module.css';
+import {getSection} from '../utils/page-utils';
 
 class Layout extends React.Component {
   render () {
     const {location, children} = this.props;
 
-    // TODO - write util function for deriving section from pathname
-    const pathArr = location.pathname.split ('/').filter (function (el) {
-      return el;
-    });
-
-    let section = '';
-    if (pathArr.length > 0) {
-      section = pathArr[0];
-    }
-
     return (
       <div className={mainStyles.mainLayout}>
         <header>
-          <Header pageName={section} />
+          <Header pageName={getSection(location)} />
         </header>
         <div
           className={mainStyles.mainLayoutWrapper}

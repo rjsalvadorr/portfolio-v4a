@@ -17,7 +17,7 @@ class HomePage extends React.Component {
         {pages.map (page => {
           if (page.section !== 'home') {
             return (
-              <Link to={page.path}>
+              <Link key={page.id} to={page.path}>
                 <div className="home-link-wrapper">
                   <h2 className={homeStyles.link}>{page.name}</h2>
                 </div>

@@ -54,7 +54,9 @@ class Header extends React.Component {
           <Burger fill={buttonFill} />
         </div>
         <span className={headerStyles.pageName}>
-          {currentPage.name}
+          <Link style={{boxShadow: `none`, color: 'inherit'}} to={currentPage.path}>
+            {currentPage.name}
+          </Link>
         </span>
         {menu}
       </div>
