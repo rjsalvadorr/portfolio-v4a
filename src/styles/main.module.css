@@ -29,3 +29,15 @@
   font-size: 1.1rem;
   margin-bottom: 3rem;
 }
+
+@media (min-width: 768px) {
+  .postLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .postArticle {
+    width: calc(50% - 1.5rem);
+  }
+}
