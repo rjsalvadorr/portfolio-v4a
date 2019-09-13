@@ -1,6 +1,7 @@
 import React from 'react';
 import DynamicGrid from './utils/dynamic-grid';
 import { radialWave3 } from './utils/wave-utils';
+import vizStyles from "../../styles/visualizations.module.css"
 
 class DynamicGridView extends React.Component {
   constructor (props) {
@@ -8,7 +9,6 @@ class DynamicGridView extends React.Component {
     this.canvasRef = React.createRef ();
     this.initializeGrid = this.initializeGrid.bind(this);
     this.updateGridUnit = this.updateGridUnit.bind(this);
-    this.updated = this.updated.bind(this);
     this.intervalId = null;
     this.unitSize = 64;
     this.state = {
@@ -56,19 +56,20 @@ class DynamicGridView extends React.Component {
     inner.style.left = `-${diameter / 2}px`;
   }
 
-  updated() {
+  render () {
     const updateFrequency = 20;
+    if(this.intervalId) {
+      // clear existing interval id
+      window.clearInterval(this.intervalId);
+    }
     this.intervalId = setInterval(() => {
       this.state.grid.applyFunc(this.updateGridUnit);
       this.state.grid.applyFunc(this.drawGridUnit);
     }, 1000 / updateFrequency);
-  }
 
-  render () {
-    console.log(this.state);
     return (
       <div
-        className="canvas-wrapper"
+        className={vizStyles.dynamicWrapper}
         ref={this.canvasRef}
         style={{
           position: 'absolute',
@@ -84,9 +85,9 @@ class DynamicGridView extends React.Component {
             <div key={`row--${idx}`} className={`grid-row grid-row--${idx}`}>
               {row.map((unit, unitIdx) => {
                 return (
-                  <td key={`unit--${idx}`} className={`grid-unit grid-unit--${unit.id}`} data-id={unit.id}>
-                    <div class="inner"></div>
-                  </td>
+                  <div key={`unit--${idx}-${unitIdx}`} className={`grid-unit grid-unit--${unit.id} ${vizStyles.dynamicUnit}`} data-id={unit.id}>
+                    <div className={`inner ${vizStyles.dynamicInner}`}></div>
+                  </div>
                 )
               })}
             </div>

@@ -18,6 +18,7 @@ Wordpress2016.overrideThemeStyles = () => {
   return {
     'h1, h2, h3, h4, h5, h6': {
       fontFamily: ['Special Elite', 'sans-serif'].join(','),
+      letterSpacing: '0.1rem',
     },
     'a.gatsby-resp-image-link': {
       boxShadow: `none`,
