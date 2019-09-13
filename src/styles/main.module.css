@@ -30,6 +30,14 @@
   margin-bottom: 3rem;
 }
 
+.footerSmall {
+  font-size: 0.85rem;
+  line-height: 1.4rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
 @media (min-width: 768px) {
   .postLinks {
     display: flex;

@@ -24,10 +24,12 @@ class Layout extends React.Component {
         >
           <main className="main-layout__content">{children}</main>
           <footer>
-            <small>
-              © {new Date ().getFullYear ()}, built with
+            <small className={mainStyles.footerSmall}>
+              © {new Date ().getFullYear ()} Randolph Jerome Salvador
+              <br/>
+              Built with
               {` `}
-              <a href="https://www.gatsbyjs.org">Gatsby</a>
+              <a href="https://www.gatsbyjs.org">GatsbyJS</a>
             </small>
           </footer>
         </div>
