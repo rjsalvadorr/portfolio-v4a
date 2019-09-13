@@ -13,7 +13,30 @@ export const getSection = (location) => {
   return section;
 }
 
-export const getPageData = (location) => {
+const pageData404 = {
+  id: 5,
+  name: '404',
+  section: '404',
+  path: '/',
+};
+
+export const getPageDataFromLocation = (location) => {
   const section = getSection(location);
-  return pages.find(page => page.section === section);
+  const pageResult = pages.find(page => page.section === section);
+
+  if(pageResult) {
+    return pageResult;
+  } else {
+    return pageData404;
+  }
+}
+
+export const getPageDataFromSection = (section) => {
+  const pageResult = pages.find(page => page.section === section);
+
+  if(pageResult) {
+    return pageResult;
+  } else {
+    return pageData404;
+  }
 }

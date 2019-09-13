@@ -3,6 +3,7 @@ import {Link} from 'gatsby';
 import headerStyles from '../styles/header.module.css';
 import Burger from '../assets/burger';
 import pages from '../data/pages';
+import {getPageDataFromSection} from '../utils/page-utils';
 
 class Header extends React.Component {
   constructor (props) {
@@ -48,7 +49,7 @@ class Header extends React.Component {
       buttonFill = '#313e5a';
     }
 
-    const currentPage = pages.find(page => page.section === this.props.pageName);
+    const currentPage = getPageDataFromSection(this.props.pageName);
     
     return (
       <div className={headerClass}>

@@ -6,13 +6,13 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import {rhythm, scale} from '../utils/typography';
 import mainStyles from '../styles/main.module.css';
-import {getPageData} from '../utils/page-utils';
+import {getPageDataFromLocation} from '../utils/page-utils';
 
 class BlogPostTemplate extends React.Component {
   render () {
     const post = this.props.data.markdownRemark;
     const siteTitle = this.props.data.site.siteMetadata.title;
-    const categoryPage = getPageData (this.props.location);
+    const categoryPage = getPageDataFromLocation (this.props.location);
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
