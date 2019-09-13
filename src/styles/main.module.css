@@ -30,6 +30,10 @@
   margin-bottom: 3rem;
 }
 
+.footer {
+  text-align: center;
+}
+
 .footerSmall {
   font-size: 0.85rem;
   line-height: 1.4rem;
