@@ -1,6 +1,6 @@
 import React from 'react';
 import BrokenGrid from './utils/broken-grid';
-import { radialWave3 } from './utils/wave-utils';
+import { getDistFromPoints, radialWave3 } from './utils/wave-utils';
 import vizStyles from "../../styles/visualizations.module.css"
 
 class BrokenGridView extends React.Component {
@@ -9,30 +9,81 @@ class BrokenGridView extends React.Component {
     this.canvasRef = React.createRef ();
     this.initializeGrid = this.initializeGrid.bind(this);
     this.drawBox = this.drawBox.bind(this);
+    this.buildCircleGrid = this.buildCircleGrid.bind(this);
     this.intervalId = null;
     this.unitSize = 64;
     this.state = {
-      grid: {}
+      grid: null,
+      circleGrid: null,
     }
   }
+
+  buildCircleGrid(inputGrid) {
+    let filteredBoxes = [];
+    if(inputGrid && inputGrid.filterBoxes) {
+      const radialOrigin = {
+        x: this.mainBox.w / 2,
+        y: this.mainBox.h / 2
+      };
+      
+      const portrait = this.mainBox.h > this.mainBox.w;
+      let longSide;
+      
+      if(portrait) {
+        longSide = this.mainBox.h;
+      } else {
+        longSide = this.mainBox.w;
+      }
+
+      const maxDist = (longSide / 2) * 0.9;
+      const intensityAdj = box => {
+        const boxCenter = {
+          x: box.x + box.w / 2,
+          y: box.y + box.h / 2
+        };
+        const dist = getDistFromPoints(radialOrigin, boxCenter);
+        let intensityRes = 1 - dist / maxDist;
+        if (intensityRes < 0) {
+          intensityRes = 0;
+        }
+        box.intensity1 = intensityRes;
+      };
+
+      const dummyFilter = (item) => {
+        return item;
+      }
+
+      filteredBoxes = inputGrid.filterBoxes(dummyFilter, intensityAdj);
+    }
+    return filteredBoxes;
+  }
   
-  initializeGrid() {
-    const BOX_GUTTER = 12;
+  initializeGrid(minBoxArea = 70, boxGutter = 20) {
+    console.log('initializing!')
+    if(!this.canvasRef.current) {
+      return;
+    }
+    
     this.mainBox = {
       x: 0,
       y: 0,
       w: this.canvasRef.current.clientWidth,
       h: this.canvasRef.current.clientHeight,
     };
+    
     const rGrid = new BrokenGrid(
       this.mainBox.x,
       this.mainBox.y,
       this.mainBox.w,
       this.mainBox.h,
-      this.mainBox.w * this.mainBox.h / 250,
-      BOX_GUTTER,
+      this.mainBox.w * this.mainBox.h / minBoxArea,
+      boxGutter,
     );
-    this.grid = rGrid;
+
+    this.setState({
+      grid: rGrid,
+      circleGrid: this.buildCircleGrid(rGrid),
+    });
   }
 
   drawBox(gUnit) {
@@ -44,64 +95,33 @@ class BrokenGridView extends React.Component {
       element.style.height = `${gUnit.h}px`;
       element.style.opacity = gUnit.intensity3;
       if(gUnit.intensity2 === 1) {
-        element.style.backgroundColor = '#2B4162';
-      }
-      if(gUnit.intensity2 === 2) {
-        element.style.backgroundColor = '#FA9F42';
-        // element.style.backgroundColor = '#0B6E4F';
+        // blue
+        element.style.backgroundColor = '#223459';
+      } else if(gUnit.intensity2 === 2) {
+        // yellow
+        element.style.backgroundColor = '#af6f2e';
+      } else  {
+        // red
+        element.style.backgroundColor = '#5f0000';
       }
     }
   }
 
   render () {
-    const updateFrequency = 20;
-    if(this.intervalId) {
-      // clear existing interval id
-      window.clearInterval(this.intervalId);
+    const cGrid = this.state.circleGrid;
+    if(!cGrid) {
+      return (
+        <div
+        className={vizStyles.bGridWrapper}
+          ref={this.canvasRef}
+        ></div>
+      );
     }
-    this.intervalId = setInterval(() => {
-      this.state.grid.applyFunc(this.updateGridUnit);
-      this.state.grid.applyFunc(this.drawGridUnit);
-    }, 1000 / updateFrequency);
 
-    return (
-      <div
-        className={vizStyles.dynamicWrapper}
-        ref={this.canvasRef}
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: -200,
-        }}
-      >
-        {this.state.grid.grid && this.state.grid.grid.map((row, idx) => {
-          return (
-            <div key={`row--${idx}`} className={`grid-row grid-row--${idx}`}>
-              {row.map((unit, unitIdx) => {
-                return (
-                  <div key={`unit--${idx}-${unitIdx}`} className={`grid-unit grid-unit--${unit.id} ${vizStyles.dynamicUnit}`} data-id={unit.id}>
-                    <div className={`inner ${vizStyles.dynamicInner}`}></div>
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })}
-      </div>
-    );
-  }
-
-  componentDidMount () {
-    const initFunc = this.initializeGrid;
-    initFunc();
-
-    const subsetIdx = Math.ceil(this.circleGrid.length * 0.25);
-    const subsetIdx2 = this.circleGrid.length - Math.ceil(this.circleGrid.length * 0.25);
-    const subset = this.circleGrid.slice(0, subsetIdx);
-    const subset2 = this.circleGrid.slice(subsetIdx2, this.circleGrid.length);
+    const subsetIdx = Math.ceil(cGrid.length * 0.25);
+    const subsetIdx2 = cGrid.length - Math.ceil(cGrid.length * 0.25);
+    const subset = cGrid.slice(0, subsetIdx);
+    const subset2 = cGrid.slice(subsetIdx2, cGrid.length);
     
     for(let box of subset) {
       box.intensity1 = box.intensity1 * 0.7;
@@ -113,8 +133,7 @@ class BrokenGridView extends React.Component {
       box.intensity2 = 2;
     }
 
-    for(let box of this.circleGrid) {
-      this.updateBox(box);
+    for(let box of cGrid) {
       this.drawBox(box);
     }
 
@@ -124,9 +143,9 @@ class BrokenGridView extends React.Component {
       x: 15,
       y: 30,
     };
-    
+
     this.intervalId = setInterval(() => {
-      for(let box of this.circleGrid) {
+      for(let box of this.state.circleGrid) {
         const intensity = radialWave3(
           centerPoint,
           {x: box.x * inputMultiplier, y: box.y * inputMultiplier},
@@ -134,10 +153,27 @@ class BrokenGridView extends React.Component {
         );
         const avgIntensity = (box.intensity1 + (intensity * 0.75)) / 2;
         box.intensity3 = avgIntensity;
-        this.updateBox(box);
         this.drawBox(box);
       }
     }, 1000 / updateFrequency);
+
+    return (
+      <div
+        className={vizStyles.bGridWrapper}
+        ref={this.canvasRef}
+      >
+        {this.state.circleGrid && this.state.circleGrid.map((box, idx) => {
+          return (
+            <div key={idx} className={`box box--${box.id} ${vizStyles.bGridBox}`} ></div>
+          )
+        })}
+      </div>
+    );
+  }
+
+  componentDidMount () {
+    const initFunc = this.initializeGrid;
+    initFunc();
 
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES

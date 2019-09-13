@@ -9,8 +9,7 @@ class Visualizations extends React.Component {
     super (props);
     this.state = {
       overlayEnabled: true,
-      // currentVisual: threeUtils.getRandomInt (1, 2),
-      currentVisual: 3,
+      currentVisual: threeUtils.getRandomInt (1, 3),
     };
     this.visualsRef = React.createRef ();
     this.fadeIn = this.fadeIn.bind (this);
