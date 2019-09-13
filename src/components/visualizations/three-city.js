@@ -9,7 +9,6 @@ class ThreeCity extends React.Component {
   constructor (props) {
     super (props);
     this.canvasRef = React.createRef ();
-    this.renderer = new THREE.WebGLRenderer ({antialias: true});
   }
 
   render () {
@@ -30,6 +29,8 @@ class ThreeCity extends React.Component {
   }
 
   componentDidMount () {
+    this.renderer = new THREE.WebGLRenderer ({antialias: true});
+    
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
 

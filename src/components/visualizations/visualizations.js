@@ -16,11 +16,6 @@ class Visualizations extends React.Component {
     this.setState ({overlayEnabled: true});
   }
 
-  componentDidMount () {
-    // this.renderer = new WebGLRenderer ({antialias: true});
-    // console.log(this.renderer);
-  }
-
   render () {
     return (
       <div className="visualizations-wrapper" ref={this.visualsRef} style={{
