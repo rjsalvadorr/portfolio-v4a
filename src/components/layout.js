@@ -23,13 +23,15 @@ class Layout extends React.Component {
           }}
         >
           <main className="main-layout__content">{children}</main>
-          <footer>
+          <footer className={mainStyles.footer}>
             <small className={mainStyles.footerSmall}>
-              © {new Date ().getFullYear ()} Randolph Jerome Salvador
+              © {new Date ().getFullYear ()} Randolph J. Salvador
               <br/>
-              Built with
-              {` `}
-              <a href="https://www.gatsbyjs.org">GatsbyJS</a>
+              <span style={{textTransform: 'none'}}>
+                Built with
+                {` `}
+                <a href="https://www.gatsbyjs.org">GatsbyJS</a>
+              </span>
             </small>
           </footer>
         </div>
