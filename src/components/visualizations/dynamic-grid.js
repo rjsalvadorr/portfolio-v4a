@@ -18,8 +18,8 @@ class DynamicGridView extends React.Component {
 
   initializeGrid() {
     const grid = new DynamicGrid(
-      this.$el.clientWidth,
-      this.$el.clientHeight,
+      this.canvasRef.current.clientWidth,
+      this.canvasRef.current.clientHeight,
       this.unitSize,
     );
     this.setState({grid: grid});
@@ -29,8 +29,8 @@ class DynamicGridView extends React.Component {
     const time = Date.now() / 1000;
     const waveCentre = {x: -1, y: 1};
     const adjustedCoords = {
-      x: gUnit.x / this.$el.clientWidth,
-      y: gUnit.y / this.$el.clientHeight,
+      x: gUnit.x / this.canvasRef.current.clientWidth,
+      y: gUnit.y / this.canvasRef.current.clientHeight,
     }
     const intensity = radialWave3(
       waveCentre,
@@ -65,6 +65,7 @@ class DynamicGridView extends React.Component {
   }
 
   render () {
+    console.log(this.state);
     return (
       <div
         className="canvas-wrapper"
@@ -78,7 +79,7 @@ class DynamicGridView extends React.Component {
           zIndex: -200,
         }}
       >
-        {this.state.grid.grid.map((row, idx) => {
+        {this.state.grid.grid && this.state.grid.grid.map((row, idx) => {
           return (
             <div key={`row--${idx}`} className={`grid-row grid-row--${idx}`}>
               {row.map((unit, unitIdx) => {
