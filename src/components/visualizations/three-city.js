@@ -174,6 +174,7 @@ class ThreeCity extends React.Component {
   }
 
   componentWillUnmount() {
+    window.clearInterval(this.intervalId);
     this.intervalId = null;
   }
 }
