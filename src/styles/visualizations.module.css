@@ -26,3 +26,22 @@
   left: -24px;
   z-index: 31;
 }
+
+/*******************************************************************************
+*  BROKEN GRID
+*******************************************************************************/
+
+.bGridWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  background-color: #080808;
+}
+
+.bGridBox {
+  position: absolute;
+  background-color: #800;
+}
