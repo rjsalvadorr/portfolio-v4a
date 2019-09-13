@@ -26,19 +26,21 @@ class Header extends React.Component {
     if (isOpen) {
       menu = (
         <div className={headerStyles.headerLinks}>
-          {pages.map (page => {
-            if (page.section !== this.props.pageName) {
-              return (
-                <div key={page.id} className={headerStyles.headerLink}>
-                  <Link style={{boxShadow: `none`}} to={page.path}>
-                    <span>{page.name}</span>
-                  </Link>
-                </div>
-              );
-            } else {
-              return null;
-            }
-          })}
+          <div className={headerStyles.linksWrapper}>
+            {pages.map (page => {
+              if (page.section !== this.props.pageName) {
+                return (
+                  <div key={page.id} className={headerStyles.headerLink}>
+                    <Link style={{boxShadow: `none`}} to={page.path}>
+                      <span>{page.name}</span>
+                    </Link>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </div>
         </div>
       );
       headerClass = `${headerStyles.header} ${headerStyles.headerOpen}`;
@@ -50,15 +52,17 @@ class Header extends React.Component {
     
     return (
       <div className={headerClass}>
-        <div className={buttonClass} onClick={this.toggleHeader}>
-          <Burger fill={buttonFill} />
+        <div className={headerStyles.headerWrapper}>
+          <div className={buttonClass} onClick={this.toggleHeader}>
+            <Burger fill={buttonFill} />
+          </div>
+          <span className={headerStyles.pageName}>
+            <Link style={{boxShadow: `none`, color: 'inherit'}} to={currentPage.path}>
+              {currentPage.name}
+            </Link>
+          </span>
+          {menu}
         </div>
-        <span className={headerStyles.pageName}>
-          <Link style={{boxShadow: `none`, color: 'inherit'}} to={currentPage.path}>
-            {currentPage.name}
-          </Link>
-        </span>
-        {menu}
       </div>
     );
   }

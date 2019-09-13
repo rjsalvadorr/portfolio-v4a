@@ -59,7 +59,7 @@ const Bio = () => {
         }}
       />
       <p style={{marginBottom: rhythm(0.75)}}>
-        <strong>{author}</strong> devs and plays tunes in Toronto.
+        <strong>RJ</strong> devs and plays tunes in Toronto.
         {` `}
         <a href={`https://twitter.com/${social.twitter}`}>Tweet</a>
         {` `}

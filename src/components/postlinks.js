@@ -5,7 +5,7 @@ import mainStyles from '../styles/main.module.css';
 
 const PostLinks = ({posts}) => {
   return (
-    <div className="post-links">
+    <div className={mainStyles.postLinks}>
       {posts.map (({node}) => {
         const title = node.frontmatter.title || node.fields.slug;
         let thumb;

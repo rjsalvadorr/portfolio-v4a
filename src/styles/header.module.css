@@ -58,3 +58,22 @@
 .headerLink a {
   color: inherit;
 }
+
+@media (min-width: 768px) {
+  .headerWrapper, .linksWrapper {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem;
+  }
+
+  .headerLinks {
+    left: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  .headerLink {
+    font-size: 1.5rem;
+    padding-top: 1rem;
+  }
+}
