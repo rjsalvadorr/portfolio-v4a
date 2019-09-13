@@ -7,6 +7,7 @@
   font-family: 'Special Elite', sans-serif;
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.33);
+  letter-spacing: 0.1rem;
 }
 
 .headerOpen {
