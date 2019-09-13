@@ -28,7 +28,7 @@ class BrokenGridView extends React.Component {
       
       const portrait = this.mainBox.h > this.mainBox.w;
       let longSide;
-      
+
       if(portrait) {
         longSide = this.mainBox.h;
       } else {
@@ -58,10 +58,25 @@ class BrokenGridView extends React.Component {
     return filteredBoxes;
   }
   
-  initializeGrid(minBoxArea = 70, boxGutter = 20) {
+  initializeGrid(minBoxArea = 35, boxGutter = 14) {
     console.log('initializing!')
     if(!this.canvasRef.current) {
       return;
+    }
+
+    let mBoxArea = minBoxArea;
+    let bGutter = boxGutter;
+
+    if(this.canvasRef.current.clientWidth >= 580) {
+      mBoxArea = 40;
+      bGutter = 16;
+    }
+    if(this.canvasRef.current.clientWidth >= 750) {
+      mBoxArea = 70;
+      bGutter = 18;
+    }
+    if(this.canvasRef.current.clientWidth >= 1200) {
+      mBoxArea = 100;
     }
     
     this.mainBox = {
@@ -76,8 +91,8 @@ class BrokenGridView extends React.Component {
       this.mainBox.y,
       this.mainBox.w,
       this.mainBox.h,
-      this.mainBox.w * this.mainBox.h / minBoxArea,
-      boxGutter,
+      this.mainBox.w * this.mainBox.h / mBoxArea,
+      bGutter,
     );
 
     this.setState({
@@ -101,8 +116,8 @@ class BrokenGridView extends React.Component {
         // yellow
         element.style.backgroundColor = '#af6f2e';
       } else  {
-        // red
-        element.style.backgroundColor = '#5f0000';
+        // grey
+        element.style.backgroundColor = '#555555';
       }
     }
   }
