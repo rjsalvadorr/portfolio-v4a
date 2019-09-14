@@ -1,30 +1,14 @@
-/*******************************************************************************
-*  DYNAMIC GRID
-*******************************************************************************/
-
-.dynamicWrapper {
+.vizWrapper,
+.bGridWrapper {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 30;
-  background-color: #3c0a00;
 }
 
-.dynamicUnit {
-  position: absolute;
-}
-
-.dynamicInner {
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: #651200;
-  position: relative;
-  top: -24px;
-  left: -24px;
-  z-index: 31;
+.vizWrapper {
+  z-index: -100;
 }
 
 /*******************************************************************************
@@ -32,11 +16,6 @@
 *******************************************************************************/
 
 .bGridWrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   z-index: -200;
   background-color: #080808;
 }

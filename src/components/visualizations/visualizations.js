@@ -3,6 +3,7 @@ import threeUtils from './utils/three-utils';
 import ThreeCity from './three-city';
 import DynamicGrid from './dynamic-grid';
 import BrokenGrid from './broken-grid';
+import vizStyles from "../../styles/visualizations.module.css"
 
 class Visualizations extends React.Component {
   constructor (props) {
@@ -20,34 +21,21 @@ class Visualizations extends React.Component {
   }
 
   render () {
-    let visual;
+    let visual = (<ThreeCity />);
 
     switch (this.state.currentVisual) {
-      case 1:
-        visual = <ThreeCity />;
-        break;
       case 2:
-        visual = <DynamicGrid />;
+        visual = (<DynamicGrid />);
         break;
       case 3:
-        visual = <BrokenGrid />;
+        visual = (<BrokenGrid />);
         break;
-      default:
-        visual = <ThreeCity />;
     }
 
     return (
       <div
-        className="visualizations-wrapper"
+        className={`${vizStyles.vizWrapper} visuals--${this.state.currentVisual}`}
         ref={this.visualsRef}
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: -100,
-        }}
       >
         {visual}
       </div>

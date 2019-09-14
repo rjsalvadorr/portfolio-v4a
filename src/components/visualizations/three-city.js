@@ -8,14 +8,14 @@ import utils from './utils/three-utils';
 class ThreeCity extends React.Component {
   constructor (props) {
     super (props);
-    this.canvasRef = React.createRef ();
+    this.cityRef = React.createRef ();
   }
 
   render () {
     return (
       <div
         className="canvas-wrapper"
-        ref={this.canvasRef}
+        ref={this.cityRef}
         style={{
           position: 'absolute',
           top: 0,
@@ -47,15 +47,15 @@ class ThreeCity extends React.Component {
     let scene = new THREE.Scene ();
     let camera = new THREE.PerspectiveCamera (
       45,
-      this.canvasRef.current.clientWidth / this.canvasRef.current.clientHeight,
+      this.cityRef.current.clientWidth / this.cityRef.current.clientHeight,
       1,
       1000
     );
     this.renderer.setSize (
-      this.canvasRef.current.clientWidth,
-      this.canvasRef.current.clientHeight
+      this.cityRef.current.clientWidth,
+      this.cityRef.current.clientHeight
     );
-    this.canvasRef.current.appendChild(this.renderer.domElement);
+    this.cityRef.current.appendChild(this.renderer.domElement);
     let light = new THREE.DirectionalLight ('white', 0.8);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
@@ -144,7 +144,7 @@ class ThreeCity extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
 
-    const canvasElement = this.canvasRef.current;
+    const canvasElement = this.cityRef.current;
     function resizeRenderer (evt) {
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
       that.renderer.setSize (

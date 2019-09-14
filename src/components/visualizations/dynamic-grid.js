@@ -1,7 +1,7 @@
 import React from 'react';
 import DynamicGrid from './utils/dynamic-grid';
 import { radialWave3 } from './utils/wave-utils';
-import vizStyles from "../../styles/visualizations.module.css"
+import vizStyles from "../../styles/dynamic-grid.module.css"
 
 class DynamicGridView extends React.Component {
   constructor (props) {
@@ -69,16 +69,8 @@ class DynamicGridView extends React.Component {
 
     return (
       <div
-        className={vizStyles.dynamicWrapper}
+        className={`${vizStyles.dynamicWrapper}`}
         ref={this.canvasRef}
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: -200,
-        }}
       >
         {this.state.grid.grid && this.state.grid.grid.map((row, idx) => {
           return (

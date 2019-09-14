@@ -6,7 +6,7 @@ import vizStyles from "../../styles/visualizations.module.css"
 class BrokenGridView extends React.Component {
   constructor (props) {
     super (props);
-    this.canvasRef = React.createRef ();
+    this.bGridRef = React.createRef ();
     this.initializeGrid = this.initializeGrid.bind(this);
     this.drawBox = this.drawBox.bind(this);
     this.buildCircleGrid = this.buildCircleGrid.bind(this);
@@ -60,30 +60,30 @@ class BrokenGridView extends React.Component {
   
   initializeGrid(minBoxArea = 35, boxGutter = 14) {
     console.log('initializing!')
-    if(!this.canvasRef.current) {
+    if(!this.bGridRef.current) {
       return;
     }
 
     let mBoxArea = minBoxArea;
     let bGutter = boxGutter;
 
-    if(this.canvasRef.current.clientWidth >= 580) {
+    if(this.bGridRef.current.clientWidth >= 580) {
       mBoxArea = 40;
       bGutter = 16;
     }
-    if(this.canvasRef.current.clientWidth >= 750) {
+    if(this.bGridRef.current.clientWidth >= 750) {
       mBoxArea = 70;
       bGutter = 18;
     }
-    if(this.canvasRef.current.clientWidth >= 1200) {
+    if(this.bGridRef.current.clientWidth >= 1200) {
       mBoxArea = 100;
     }
     
     this.mainBox = {
       x: 0,
       y: 0,
-      w: this.canvasRef.current.clientWidth,
-      h: this.canvasRef.current.clientHeight,
+      w: this.bGridRef.current.clientWidth,
+      h: this.bGridRef.current.clientHeight,
     };
     
     const rGrid = new BrokenGrid(
@@ -128,7 +128,7 @@ class BrokenGridView extends React.Component {
       return (
         <div
         className={vizStyles.bGridWrapper}
-          ref={this.canvasRef}
+          ref={this.bGridRef}
         ></div>
       );
     }
@@ -175,7 +175,7 @@ class BrokenGridView extends React.Component {
     return (
       <div
         className={vizStyles.bGridWrapper}
-        ref={this.canvasRef}
+        ref={this.bGridRef}
       >
         {this.state.circleGrid && this.state.circleGrid.map((box, idx) => {
           return (
