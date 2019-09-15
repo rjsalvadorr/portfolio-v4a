@@ -17,7 +17,7 @@ class NotFoundPage extends React.Component {
           <p>You just hit a route that doesn&#39;t exist.</p>
           <p style={{fontSize: '4rem'}}>:(</p>
           <p>
-            Back to <Link to="/">Home</Link>
+            Back to <Link to="/">Home</Link>.
           </p>
           <hr />
         </div>

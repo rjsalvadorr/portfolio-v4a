@@ -9,9 +9,11 @@ options:
   - hideDate
 ---
 
-Sometime in late 2015/early 2016, I was involved in a SnackWatcher project at the Jonah Group. This was a fun exercise involving a sweet office tradition.
+Sometime in late 2015/early 2016, I was involved in a neat project at the Jonah Group.
 
 <!-- more -->
+
+This was a fun exercise involving a sweet office tradition.
 
 ## Hardware used
 

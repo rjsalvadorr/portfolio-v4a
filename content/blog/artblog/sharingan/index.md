@@ -8,7 +8,9 @@ thumbnail: ./thumb.jpg
 ---
 
 I watched a Naruto marathon a few months ago, so I was destined to make some fanart eventually.
+
 <!-- more -->
+
 Behold:
 
 ![yep yep yep](./full.jpg "yep yep")
