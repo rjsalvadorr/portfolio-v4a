@@ -30,6 +30,8 @@ class Visualizations extends React.Component {
       case 3:
         visual = (<BrokenGrid />);
         break;
+      default:
+        visual = (<ThreeCity />);
     }
 
     return (
