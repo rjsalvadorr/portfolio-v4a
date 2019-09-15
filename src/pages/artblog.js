@@ -17,7 +17,8 @@ class ArtBlogPage extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Art/blog posts" />
         <p className={mainStyles.categoryIntro}>
-          I focused on visual art in my teen years, only to abandon it after high school. I've rediscovered the joy of painting in 2019, and now I'm playing with acrylic on canvas again.
+          I used to make lots of visual art in my teen years.
+          Every now and then, I rediscover the joy of art-ing and cook up a painting or two.
         </p>
         <PostLinks posts={posts} />
         <Bio />

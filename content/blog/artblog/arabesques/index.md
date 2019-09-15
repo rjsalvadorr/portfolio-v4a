@@ -7,8 +7,11 @@ category: art
 thumbnail: ./thumb.jpg
 ---
 
-I painted these after a vacation to Egypt. The art and architecture of Old Cairo were especially inspiring. <!-- more -->  
-Both works are acrylic on canvas (20" x 10"), finished with semi-gloss varnish.
+I painted these after a vacation to Egypt. The art and architecture of Old Cairo were especially inspiring.
+
+<!-- more -->
+
+Both works are acrylic on canvas (24" x 18"), finished with semi-gloss varnish.
 
 ![yep yep yep](./RJS-001-levant-one.jpg "yep yep")
 

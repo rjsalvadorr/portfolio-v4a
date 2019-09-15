@@ -17,7 +17,9 @@ class CodePage extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Software posts" />
         <p className={mainStyles.categoryIntro}>
-          I'm a web developer based in Toronto, with about five years of pro dev experience. So far, my career has been focused on the front-end and making sure that pages work according to visual specs.
+          Hey, I'm a web developer based in Toronto, with about five years of pro dev experience.
+          Currently, I'm doing a lot of work with ReactJS, VueJS, and modern JS tools.
+          I typically catch up with new tech by playing around in personal projects (see below).
         </p>
         <PostLinks posts={posts} />
         <Bio />

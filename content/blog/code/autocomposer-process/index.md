@@ -7,9 +7,11 @@ category: software
 thumbnail: ./thumb.jpg
 ---
 
-Web app that automagically writes music! <!-- more -->
+A web app that automagically writes music!
 
-I had a few requirements in mind when building this:
+<!-- more -->
+
+I had a few features in mind when building this:
 
 - generating melodies based on a given chord progression
 - playing back those generated melodies to users

@@ -37,7 +37,7 @@ class BlogPostTemplate extends React.Component {
           </header>
           <section dangerouslySetInnerHTML={{__html: post.html}} />
           <p>
-            Back to <Link to={categoryPage.path}>{categoryPage.name}</Link>
+            Back to <Link to={categoryPage.path}>{categoryPage.name}</Link>.
           </p>
           <footer>
             <Bio />

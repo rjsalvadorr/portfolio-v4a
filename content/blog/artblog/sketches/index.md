@@ -7,7 +7,9 @@ category: art
 thumbnail: ./thumb.jpg
 ---
 
-Just a bunch of fun bits from my sketchbooks.  <!-- more -->
+Randoms from my sketchbooks.
+
+<!-- more -->
 
 ![yep yep yep](./sketch-facepalm.jpg "yep yep")
 

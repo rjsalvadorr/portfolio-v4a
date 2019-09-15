@@ -7,15 +7,18 @@ category: software
 thumbnail: ./thumb.jpg
 ---
 
-Around early 2018, I compiled guitar chord diagrams as I studied various chord patterns and inversions. That turned into a huge Visio document, which was irritating to update. I figured that putting it on the web would be a much better idea.
+Earlier this year, I was studying chord patterns and wrote them into a document.
+This was a PITA to update, so I made an app out of it.
 
 <!-- more -->
 
-This was also a neat opportunity to learn some tech stuff, so I decided to jump on the Vue bandwagon for this one. I found that the [Vue CLI tools](https://cli.vuejs.org/guide/creating-a-project.html) didn't get in my way at all, and the Vue documentation made for an gentle learning curve for a React dev.
+I took this opportunity to learn some tech, so I decided to jump on the Vue bandwagon for it.
+I found that the [Vue CLI tools](https://cli.vuejs.org/guide/creating-a-project.html) didn't get in my way at all,
+and the Vue documentation made for a gentle learning curve.
 
 ## Process
 
-With this project, I just needed to figure out two things, and all the hard stuff was finished in one afternoon:
+With this project, I needed to figure out two things, and all the hard stuff was finished in one afternoon:
 
 1. Data format for the chord diagrams. I laid it out in a few JSON files here.
 1. Vue component scheme. I settled for four components here:
@@ -24,7 +27,7 @@ With this project, I just needed to figure out two things, and all the hard stuf
   + FretboardMarker
   + PatternGroup
 
-If you're already familiar with web dev frameworks and the Node stack, the view from Vue is majestic.
+For someone already familiar with web dev frameworks and the Node stack, the view from Vue is majestic.
 
 For more info, check out the project repository at [github.com/rjsalvadorr/guitarragrams](https://github.com/rjsalvadorr/guitarragrams)
 

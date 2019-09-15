@@ -17,7 +17,8 @@ class MusicPage extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Music posts" />
         <p className={mainStyles.categoryIntro}>
-          My main instruments are the classical guitar and bass guitar. After dabbling with violin, piano, and cello, I've stuck with classical/flamenco guitar (clips coming soon...)
+          My main instruments are the classical guitar and bass guitar.
+          After some musical wandering (on bass, violin, piano, and cello), I decided to stick with classical/flamenco guitar.
         </p>
         <PostLinks posts={posts} />
         <Bio />
