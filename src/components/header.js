@@ -49,8 +49,8 @@ class Header extends React.Component {
       buttonFill = '#313e5a';
     }
 
-    const currentPage = getPageDataFromSection(this.props.pageName);
-    
+    const currentPage = getPageDataFromSection (this.props.pageName);
+
     return (
       <div className={headerClass}>
         <div className={headerStyles.headerWrapper}>
@@ -58,12 +58,16 @@ class Header extends React.Component {
             <Burger fill={buttonFill} />
           </div>
           <span className={headerStyles.pageName}>
-            <Link style={{boxShadow: `none`, color: 'inherit'}} to={currentPage.path}>
+            <Link
+              style={{boxShadow: `none`, color: 'inherit'}}
+              to={currentPage.path}
+            >
               {currentPage.name}
             </Link>
           </span>
           {menu}
         </div>
+        {isOpen && <div className={headerStyles.headerOverlay} />}
       </div>
     );
   }
