@@ -10,7 +10,6 @@ class Visualizations extends React.Component {
     super (props);
     this.state = {
       overlayEnabled: true,
-      currentVisual: threeUtils.getRandomInt (1, 3),
     };
     this.visualsRef = React.createRef ();
     this.fadeIn = this.fadeIn.bind (this);
@@ -23,7 +22,8 @@ class Visualizations extends React.Component {
   render () {
     let visual = (<ThreeCity />);
 
-    switch (this.state.currentVisual) {
+    const randomVis = threeUtils.getRandomInt (1, 3);
+    switch (randomVis) {
       case 2:
         visual = (<DynamicGrid />);
         break;
@@ -34,7 +34,7 @@ class Visualizations extends React.Component {
 
     return (
       <div
-        className={`${vizStyles.vizWrapper} visuals--${this.state.currentVisual}`}
+        className={`${vizStyles.vizWrapper} visuals--${randomVis}`}
         ref={this.visualsRef}
       >
         {visual}
