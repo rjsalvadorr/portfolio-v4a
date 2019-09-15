@@ -67,7 +67,7 @@ class Header extends React.Component {
           </span>
           {menu}
         </div>
-        {isOpen && <div className={headerStyles.headerOverlay} />}
+        {isOpen && <div className={headerStyles.headerOverlay} onClick={this.toggleHeader}/>}
       </div>
     );
   }
