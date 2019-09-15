@@ -21,7 +21,7 @@ Behold:
 
 ## Materials/media
 
-They're all acrylic on canvas (20" x 10"), finished with semi-gloss varnish.
+They're all acrylic on canvas (24" x 12"), finished with semi-gloss varnish.
 
 1. Poster board
 1. X-acto knife
