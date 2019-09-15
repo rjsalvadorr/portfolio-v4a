@@ -60,6 +60,16 @@
   color: inherit;
 }
 
+.headerOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 150;
+}
+
 @media (min-width: 768px) {
   .headerWrapper, .linksWrapper {
     max-width: 42rem;
