@@ -142,7 +142,7 @@ class BrokenGridView extends React.Component {
       box.intensity1 = box.intensity1 * 0.7;
       box.intensity2 = 1;
     }
-s
+
     for(let box of subset2) {
       box.intensity1 = box.intensity1 * 0.5;
       box.intensity2 = 2;
@@ -164,7 +164,7 @@ s
       window.clearInterval(this.intervalId);
       this.intervalId = null;
     }
-
+    
     this.intervalId = setInterval(() => {
       for(let box of this.state.circleGrid) {
         const intensity = radialWave3(
