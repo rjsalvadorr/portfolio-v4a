@@ -7,7 +7,9 @@ category: art
 thumbnail: ./thumb.jpg
 ---
 
-I watched a Naruto marathon a few months ago, so I was destined to make some fanart eventually. <!-- more --> I recently found myself in-between jobs, so the opportunity to make art presented itself. When life gives you chakras, make jutsus.
+I watched a Naruto marathon a few months ago, so I was destined to make some fanart eventually.
+<!-- more -->
+Behold:
 
 ![yep yep yep](./full.jpg "yep yep")
 
@@ -17,10 +19,13 @@ I watched a Naruto marathon a few months ago, so I was destined to make some fan
 
 ## Materials/media
 
+They're all acrylic on canvas (20" x 10"), finished with semi-gloss varnish.
+
 1. Poster board
 1. X-acto knife
 1. Canvas
 1. Acrylic paint
+1. Acrylic varnish
 
 ![yep yep yep](./sasuke-table.jpg "yep yep")
 
