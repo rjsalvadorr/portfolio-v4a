@@ -13,18 +13,20 @@ class ThreeCity extends React.Component {
 
   render () {
     return (
-      <div
-        className="canvas-wrapper"
-        ref={this.cityRef}
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: -200,
-        }}
-      />
+      <div className="three-city-wrapper-wrapper">
+        <div
+          className="three-city-wrapper"
+          ref={this.cityRef}
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            zIndex: -200,
+          }}
+        />
+      </div>
     );
   }
 

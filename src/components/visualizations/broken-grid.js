@@ -142,7 +142,7 @@ class BrokenGridView extends React.Component {
       box.intensity1 = box.intensity1 * 0.7;
       box.intensity2 = 1;
     }
-
+s
     for(let box of subset2) {
       box.intensity1 = box.intensity1 * 0.5;
       box.intensity2 = 2;
@@ -159,6 +159,12 @@ class BrokenGridView extends React.Component {
       y: 30,
     };
 
+    if(this.intervalId) {
+      // clear existing interval id
+      window.clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+
     this.intervalId = setInterval(() => {
       for(let box of this.state.circleGrid) {
         const intensity = radialWave3(
@@ -173,15 +179,17 @@ class BrokenGridView extends React.Component {
     }, 1000 / updateFrequency);
 
     return (
-      <div
-        className={vizStyles.bGridWrapper}
-        ref={this.bGridRef}
-      >
-        {this.state.circleGrid && this.state.circleGrid.map((box, idx) => {
-          return (
-            <div key={idx} className={`box box--${box.id} ${vizStyles.bGridBox}`} ></div>
-          )
-        })}
+      <div className="broken-grid-wrapper-wrapper">
+        <div
+          className={vizStyles.bGridWrapper}
+          ref={this.bGridRef}
+        >
+          {this.state.circleGrid && this.state.circleGrid.map((box, idx) => {
+            return (
+              <div key={idx} className={`box box--${box.id} ${vizStyles.bGridBox}`} ></div>
+            )
+          })}
+        </div>
       </div>
     );
   }

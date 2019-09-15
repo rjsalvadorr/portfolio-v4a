@@ -58,33 +58,40 @@ class DynamicGridView extends React.Component {
 
   render () {
     const updateFrequency = 20;
+    
     if(this.intervalId) {
       // clear existing interval id
       window.clearInterval(this.intervalId);
+      this.intervalId = null;
     }
-    this.intervalId = setInterval(() => {
-      this.state.grid.applyFunc(this.updateGridUnit);
-      this.state.grid.applyFunc(this.drawGridUnit);
-    }, 1000 / updateFrequency);
+
+    if(this.state.grid) {
+      this.intervalId = setInterval(() => {
+        this.state.grid.applyFunc(this.updateGridUnit);
+        this.state.grid.applyFunc(this.drawGridUnit);
+      }, 1000 / updateFrequency);
+    }
 
     return (
-      <div
-        className={`${vizStyles.dynamicWrapper}`}
-        ref={this.canvasRef}
-      >
-        {this.state.grid.grid && this.state.grid.grid.map((row, idx) => {
-          return (
-            <div key={`row--${idx}`} className={`grid-row grid-row--${idx}`}>
-              {row.map((unit, unitIdx) => {
-                return (
-                  <div key={`unit--${idx}-${unitIdx}`} className={`grid-unit grid-unit--${unit.id} ${vizStyles.dynamicUnit}`} data-id={unit.id}>
-                    <div className={`inner ${vizStyles.dynamicInner}`}></div>
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })}
+      <div className="dynamic-grid-wrapper-wrapper">
+        <div
+          className={`${vizStyles.dynamicWrapper}`}
+          ref={this.canvasRef}
+        >
+          {this.state.grid.grid && this.state.grid.grid.map((row, idx) => {
+            return (
+              <div key={`row--${idx}`} className={`grid-row grid-row--${idx}`}>
+                {row.map((unit, unitIdx) => {
+                  return (
+                    <div key={`unit--${idx}-${unitIdx}`} className={`grid-unit grid-unit--${unit.id} ${vizStyles.dynamicUnit}`} data-id={unit.id}>
+                      <div className={`inner ${vizStyles.dynamicInner}`}></div>
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
+        </div>
       </div>
     );
   }
