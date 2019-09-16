@@ -1,5 +1,4 @@
 import React from 'react';
-import threeUtils from './utils/three-utils';
 import ThreeCity from './three-city';
 import DynamicGrid from './dynamic-grid';
 import BrokenGrid from './broken-grid';
@@ -29,9 +28,8 @@ class Visualizations extends React.Component {
   }
 
   resetVisual () {
-    const randomVis = threeUtils.getRandomInt (1, 3);
     let nextVis = this.state.currentVisual + 1;
-    if(nextVis > 3) {
+    if (nextVis > 3) {
       nextVis = 1;
     }
     this.setState ({
@@ -47,21 +45,23 @@ class Visualizations extends React.Component {
     const time = 5000; // five seconds
 
     this.intervalId = window.setInterval (function () {
-      reset();
-      setTimeout(function(){
-         fade();
+      reset ();
+      setTimeout (function () {
+        fade ();
       }, time - 500);
     }, time);
-    
-    reset();
-    setTimeout(function(){
-      fade();
-   }, time - 500);
+
+    reset ();
+    setTimeout (function () {
+      fade ();
+    }, time - 500);
   }
 
   render () {
     let visual = <ThreeCity />;
-    let overlayClass = this.state.overlayOff ? `${vizStyles.vizOverlay} ${vizStyles.vizOverlayOff}` : `${vizStyles.vizOverlay}`;
+    let overlayClass = this.state.overlayOff
+      ? `${vizStyles.vizOverlay} ${vizStyles.vizOverlayOff}`
+      : `${vizStyles.vizOverlay}`;
 
     switch (this.state.currentVisual) {
       case 2:
@@ -76,12 +76,11 @@ class Visualizations extends React.Component {
 
     return (
       <div>
-        <div className={overlayClass}>
-        </div>
+        <div className={overlayClass} />
         <div
           className={`${vizStyles.vizWrapper} visuals--${this.state.currentVisual}`}
           ref={this.visualsRef}
-          >
+        >
           {visual}
         </div>
       </div>
