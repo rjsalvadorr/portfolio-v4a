@@ -88,3 +88,9 @@
     padding-top: 1rem;
   }
 }
+
+@media (min-width: 1200px) {
+  .headerWrapper, .linksWrapper {
+    max-width: 56rem;
+  }
+}

@@ -16,15 +16,23 @@ class Visualizations extends React.Component {
     this.fadeOut = this.fadeOut.bind (this);
     this.resetVisual = this.resetVisual.bind (this);
     this.intervalId = null;
-    this.intervalId2 = null;
+    this.timeoutId = null;
   }
 
   fadeIn () {
-    this.setState ({overlayOff: true});
+    try {
+      this.setState ({overlayOff: true});
+    } catch (e) {
+      console.log ("Couldn't update state properly...");
+    }
   }
 
   fadeOut () {
-    this.setState ({overlayOff: false});
+    try {
+      this.setState ({overlayOff: false});
+    } catch (e) {
+      console.log ("Couldn't update state properly...");
+    }
   }
 
   resetVisual () {
@@ -32,10 +40,14 @@ class Visualizations extends React.Component {
     if (nextVis > 3) {
       nextVis = 1;
     }
-    this.setState ({
-      overlayOff: true,
-      currentVisual: nextVis,
-    });
+    try {
+      this.setState ({
+        overlayOff: true,
+        currentVisual: nextVis,
+      });
+    } catch (e) {
+      console.log ("Couldn't update state properly...");
+    }
   }
 
   componentDidMount () {
@@ -43,10 +55,11 @@ class Visualizations extends React.Component {
     const fade = this.fadeOut;
 
     const time = 5000; // five seconds
+    const that = this;
 
     this.intervalId = window.setInterval (function () {
       reset ();
-      setTimeout (function () {
+      that.timeoutId = setTimeout (function () {
         fade ();
       }, time - 500);
     }, time);
@@ -85,6 +98,13 @@ class Visualizations extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentWillUnmount () {
+    window.clearInterval (this.intervalId);
+    clearTimeout (this.timeoutId);
+    this.intervalId = null;
+    this.timeoutId = null;
   }
 }
 

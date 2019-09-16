@@ -20,7 +20,7 @@ class BlogPostTemplate extends React.Component {
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
-        <article>
+        <article className={mainStyles.blogPostArticle}>
           <header>
             <h1 className={mainStyles.postHeading}>
               {post.frontmatter.title}

@@ -16,9 +16,6 @@ class Layout extends React.Component {
         <div
           className={mainStyles.mainLayoutWrapper}
           style={{
-            marginLeft: `auto`,
-            marginRight: `auto`,
-            maxWidth: rhythm (24),
             padding: `${rhythm (1)} ${rhythm (3 / 4)}`,
           }}
         >

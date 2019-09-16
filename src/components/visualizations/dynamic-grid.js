@@ -17,6 +17,9 @@ class DynamicGridView extends React.Component {
   }
 
   initializeGrid() {
+    if(!this.canvasRef.current){
+      return;
+    }
     const grid = new DynamicGrid(
       this.canvasRef.current.clientWidth,
       this.canvasRef.current.clientHeight,

@@ -8,6 +8,7 @@
 .mainLayoutWrapper {
   margin-left: auto;
   margin-right: auto;
+  max-width: 42rem;
 }
 
 .postHeading {
@@ -52,5 +53,19 @@
 
   .postArticle {
     width: calc(50% - 1.5rem);
+  }
+
+  .blogPostArticle {
+    padding-top: 0.75rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mainLayoutWrapper {
+    max-width: 56rem;
+  }
+
+  .blogPostArticle {
+    padding-top: 1.5rem;
   }
 }
