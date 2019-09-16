@@ -59,7 +59,6 @@ class BrokenGridView extends React.Component {
   }
   
   initializeGrid(minBoxArea = 35, boxGutter = 14) {
-    console.log('initializing!')
     if(!this.bGridRef.current) {
       return;
     }
