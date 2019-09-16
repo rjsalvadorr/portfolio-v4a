@@ -1,5 +1,6 @@
 .vizWrapper,
-.bGridWrapper {
+.bGridWrapper,
+.vizOverlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -9,6 +10,18 @@
 
 .vizWrapper {
   z-index: -100;
+}
+
+.vizOverlay {
+  background-color: #000000;
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+}
+
+.vizOverlayOff {
+  opacity: 0;
 }
 
 /*******************************************************************************
