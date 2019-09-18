@@ -47,27 +47,18 @@ class Header extends React.Component {
             <Burger fill={buttonFill} />
           </div>
           <span className={headerStyles.pageName}>
-            <Link
-              style={{boxShadow: `none`, color: 'inherit'}}
-              to={currentPage.path}
-            >
-              {currentPage.name}
-            </Link>
+            {currentPage.name}
           </span>
           <div className={menuClass}>
             <div className={headerStyles.linksWrapper}>
               {pages.map (page => {
-                if (page.section !== this.props.pageName) {
-                  return (
-                    <div key={page.id} className={headerStyles.headerLink}>
-                      <Link style={{boxShadow: `none`}} to={page.path}>
-                        <span>{page.name}</span>
-                      </Link>
-                    </div>
-                  );
-                } else {
-                  return null;
-                }
+                return (
+                  <div key={page.id} className={headerStyles.headerLink}>
+                    <Link style={{boxShadow: `none`}} to={page.path}>
+                      <span>{page.name}</span>
+                    </Link>
+                  </div>
+                );
               })}
             </div>
           </div>
