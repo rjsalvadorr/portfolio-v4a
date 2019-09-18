@@ -55,9 +55,11 @@
   transition-property: opacity;
   transition-duration: 0.175s;
   transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
 }
 
 .headerLinksOpen {
+  pointer-events: auto;
   opacity: 1;
 }
 
