@@ -51,6 +51,14 @@
   padding-top: 3rem;
   z-index: 200;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.33);
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.175s;
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.headerLinksOpen {
+  opacity: 1;
 }
 
 .headerLink {

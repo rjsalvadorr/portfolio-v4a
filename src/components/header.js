@@ -24,32 +24,14 @@ class Header extends React.Component {
 
   render () {
     const isOpen = this.state.open;
-    let menu = null;
+    let menuClass = headerStyles.headerLinks;
     let headerClass = headerStyles.header;
     let buttonClass = headerStyles.headerButton;
     let overlayClass = headerStyles.headerOverlay;
     let buttonFill = '#ffffff';
 
     if (isOpen) {
-      menu = (
-        <div className={headerStyles.headerLinks}>
-          <div className={headerStyles.linksWrapper}>
-            {pages.map (page => {
-              if (page.section !== this.props.pageName) {
-                return (
-                  <div key={page.id} className={headerStyles.headerLink}>
-                    <Link style={{boxShadow: `none`}} to={page.path}>
-                      <span>{page.name}</span>
-                    </Link>
-                  </div>
-                );
-              } else {
-                return null;
-              }
-            })}
-          </div>
-        </div>
-      );
+      menuClass = `${headerStyles.headerLinks} ${headerStyles.headerLinksOpen}`;
       headerClass = `${headerStyles.header} ${headerStyles.headerOpen}`;
       buttonClass = `${headerStyles.headerButton} ${headerStyles.headerButtonOpen}`;
       overlayClass = `${headerStyles.headerOverlay} ${headerStyles.headerOverlayOpen}`;
@@ -72,7 +54,23 @@ class Header extends React.Component {
               {currentPage.name}
             </Link>
           </span>
-          {menu}
+          <div className={menuClass}>
+            <div className={headerStyles.linksWrapper}>
+              {pages.map (page => {
+                if (page.section !== this.props.pageName) {
+                  return (
+                    <div key={page.id} className={headerStyles.headerLink}>
+                      <Link style={{boxShadow: `none`}} to={page.path}>
+                        <span>{page.name}</span>
+                      </Link>
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+            </div>
+          </div>
         </div>
         {<div className={overlayClass} onClick={this.closeHeader}/>}
       </div>
