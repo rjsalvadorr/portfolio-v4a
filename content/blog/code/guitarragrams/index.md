@@ -23,10 +23,10 @@ With this project, I needed to figure out two things, and all the hard stuff was
 
 1. Data format for the chord diagrams. I laid it out in a few JSON files here.
 1. Vue component scheme. I settled for four components here:
-  + ChordGroup
-  + FretboardDiagram
-  + FretboardMarker
-  + PatternGroup
+    + ChordGroup
+    + FretboardDiagram
+    + FretboardMarker
+    + PatternGroup
 
 For someone already familiar with web dev frameworks and the Node stack, the view from Vue is majestic.
 
