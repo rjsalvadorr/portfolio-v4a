@@ -75,10 +75,12 @@
   transition-property: opacity;
   transition-duration: 0.25s;
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  pointer-events: none;
 }
 
 .headerOverlayOpen {
   opacity: 1;
+  pointer-events: auto;
 }
 
 @media (min-width: 768px) {
