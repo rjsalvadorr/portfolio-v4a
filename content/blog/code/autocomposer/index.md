@@ -7,7 +7,7 @@ category: software
 thumbnail: ./thumb.png
 ---
 
-I've always wanted to make software that did stuff with music in some way. <!-- more --> That led me to play with JS libraries out there that can handle music theory, playback, and notation. Slowly, I started to think of ways to tie this all together to build an automatic music composer.
+I've always wanted to make software that did something with music. <!-- more --> That led me to play with JS libraries out there that can handle music theory, playback, and notation. Slowly, I started to think of ways to tie this all together to build an automatic music composer.
 
 ![yep yep yep](./autocomposer-sketch-02.jpg "yep yep")
 
