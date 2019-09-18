@@ -13,10 +13,13 @@ Two brothers tried to make a Zelda-esque platformer, and they caught a glimpse o
 
 <!-- more -->
 
-Sometime around winter 2012, I used my new-found C++ skills to make a simple 2D game, like the Nintendo classics.
-It was eventually called BroQuest 'cause my brother Mike offered to help with his art skills.
+Sometime around winter 2012, I used my new-found C++ skills to make a simple 2D game, like the Nintendo classics. My brother Mike offered to help with his art skills. So the BroQuest began.
 
-### Game plan
+## Tools used
+
+- [SDL](https://www.libsdl.org/) as the foundation of the game's engine. This library allowed me to work with graphics and keyboard controls using C++.
+
+## Overview
 
 The game had to blend together:
 
@@ -34,18 +37,18 @@ No problem, that's gonna be easy. I'm a software magician now.
 
 ![yep yep yep](./broquest-sketch-02.jpg "yep yep")
 
-### Pulling it off
+## Process
 
 It wasn't easy. If I was a software magician then, I was a very inept one.
 
-I ended up writing a game engine from scratch with [*SDL*](https://www.libsdl.org/), a C++ library for controlling graphics/audio.
-I walked through a tutorial, and gradually learned how to assemble all of those elements together:
+I ended up writing a game engine from scratch by walking through an SDL tutorial.
+Over a few weeks, I learned how to assemble all these elements together:
 
-1. Game engine!
+1. Game engine
 1. Co-ordinate/map grid system
 1. Basic animation through sprites
 1. Controls to let the player move and interact with world by opening things and slaying NPCs
-1. Primitive AI. Yeah, all these guys do is move towards my character in a straight line and attack if I'm close enough. But they're doing these things without player commands!
+1. Primitive AI. Yeah, all these guys did is move towards my character in a straight line and attack if I'm close enough. But they were doing these things automatically
 
 ![yep yep yep](./broquest-dead.jpg "yep yep")
 
@@ -55,7 +58,7 @@ I walked through a tutorial, and gradually learned how to assemble all of those 
 
 ![yep yep yep](./broquest-spritesheet.png "yep yep")
 
-### End of Experiment
+## Results
 
 Unfortunately, we stopped working on this when the summer ended and we just got busy with life.
 I went back to school, and my brother got a bit more busy at work.
@@ -64,6 +67,6 @@ I learned how much effort it took to build a good game.
 Hell, building a _playable_ game feels like it's an achievement in itself.
 All of this gave me tons of respect for serious game devs.
 
-Game dev'ing is really fun stuff though. It felt like Bob Ross's feelings about the canvas:
+Game dev'ing is really fun stuff though. It let me understand Bob Ross's feelings about the canvas:
 
 > See how you can move things around? You have unlimited power on this canvas -- can literally, literally move mountains
