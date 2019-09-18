@@ -10,6 +10,7 @@ class Header extends React.Component {
     super (props);
     this.state = {open: false};
     this.toggleHeader = this.toggleHeader.bind (this);
+    this.closeHeader = this.closeHeader.bind (this);
   }
 
   toggleHeader () {
@@ -17,11 +18,16 @@ class Header extends React.Component {
     this.setState ({open: !openState});
   }
 
+  closeHeader () {
+    this.setState ({open: false});
+  }
+
   render () {
     const isOpen = this.state.open;
     let menu = null;
     let headerClass = headerStyles.header;
     let buttonClass = headerStyles.headerButton;
+    let overlayClass = headerStyles.headerOverlay;
     let buttonFill = '#ffffff';
 
     if (isOpen) {
@@ -46,6 +52,7 @@ class Header extends React.Component {
       );
       headerClass = `${headerStyles.header} ${headerStyles.headerOpen}`;
       buttonClass = `${headerStyles.headerButton} ${headerStyles.headerButtonOpen}`;
+      overlayClass = `${headerStyles.headerOverlay} ${headerStyles.headerOverlayOpen}`;
       buttonFill = '#313e5a';
     }
 
@@ -67,7 +74,7 @@ class Header extends React.Component {
           </span>
           {menu}
         </div>
-        {isOpen && <div className={headerStyles.headerOverlay} onClick={this.toggleHeader}/>}
+        {<div className={overlayClass} onClick={this.closeHeader}/>}
       </div>
     );
   }

@@ -24,6 +24,9 @@
   position: relative;
   z-index: 300;
   vertical-align: top;
+  transition-property: background-color;
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .headerButtonOpen {
@@ -68,6 +71,14 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 150;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.headerOverlayOpen {
+  opacity: 1;
 }
 
 @media (min-width: 768px) {
