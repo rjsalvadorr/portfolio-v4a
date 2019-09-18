@@ -8,6 +8,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
+import mainStyles from "../styles/main.module.css"
 
 import { rhythm } from "../utils/typography"
 
@@ -36,6 +37,7 @@ const Bio = () => {
   const { author, social } = data.site.siteMetadata
   return (
     <div
+      className={mainStyles.bio}
       style={{
         display: `flex`,
         marginBottom: rhythm(1),
@@ -58,7 +60,7 @@ const Bio = () => {
           borderRadius: `50%`,
         }}
       />
-      <p style={{marginBottom: rhythm(0.75)}}>
+      <p className={mainStyles.bioText} style={{marginBottom: rhythm(0.75)}}>
         <strong>RJ</strong> devs and plays tunes in Toronto.
         {` `}
         <a href={`https://twitter.com/${social.twitter}`}>Tweet</a>

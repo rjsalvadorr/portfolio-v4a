@@ -68,4 +68,12 @@
   .blogPostArticle {
     padding-top: 1.5rem;
   }
+
+  .bio {
+    padding-bottom: 0.5rem;
+  }
+
+  .bioText {
+    padding-top: 0.5rem;
+  }
 }

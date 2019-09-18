@@ -72,7 +72,7 @@ class Header extends React.Component {
             </div>
           </div>
         </div>
-        {<div className={overlayClass} onClick={this.closeHeader}/>}
+        {<div className={overlayClass} onClick={this.closeHeader} />}
       </div>
     );
   }
