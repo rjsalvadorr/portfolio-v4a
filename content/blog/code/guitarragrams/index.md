@@ -4,7 +4,7 @@ subtitle: Guitar chord diagrams
 date: 2018-09-23 18:02:06
 type: post
 category: software
-thumbnail: ./thumb.png
+thumbnail: ./snapshot.png
 ---
 
 Earlier this year, I was studying chord patterns and wrote them into a document.
@@ -34,9 +34,9 @@ For someone already familiar with web dev frameworks and the Node stack, the vie
 
 ## Results
 
+![yep yep yep](./snapshot.png "yep yep")
+
 Take a look at [rjsalvadorr.github.io/guitarragrams/](https://rjsalvadorr.github.io/guitarragrams/)  
 For more info, check out the project repository at [github.com/rjsalvadorr/guitarragrams](https://github.com/rjsalvadorr/guitarragrams)
-
-![yep yep yep](./snapshot.png "yep yep")
 
 I'm happy with this project! I still use it from time to time when I want to play around with chord voicings.
