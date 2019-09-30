@@ -10,7 +10,8 @@ const PostLinks = ({posts}) => {
         const title = node.frontmatter.title || node.fields.slug;
         let thumb;
 
-        if (node.frontmatter.thumbnail) {
+        console.log(node.frontmatter)
+        if (node.frontmatter.thumbnail && node.frontmatter.thumbnail.childImageSharp) {
           const thumbFluid = node.frontmatter.thumbnail.childImageSharp.fluid;
           thumb = (
             <Img
