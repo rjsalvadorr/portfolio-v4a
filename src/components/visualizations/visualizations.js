@@ -23,7 +23,7 @@ class Visualizations extends React.Component {
     try {
       this.setState ({overlayOff: true});
     } catch (e) {
-      console.log ("Couldn't update state properly...");
+      console.log ("Couldn't update state properly");
     }
   }
 
@@ -31,7 +31,7 @@ class Visualizations extends React.Component {
     try {
       this.setState ({overlayOff: false});
     } catch (e) {
-      console.log ("Couldn't update state properly...");
+      console.log ("Couldn't update state properly");
     }
   }
 
@@ -46,7 +46,7 @@ class Visualizations extends React.Component {
         currentVisual: nextVis,
       });
     } catch (e) {
-      console.log ("Couldn't update state properly...");
+      console.log ("Couldn't update state properly");
     }
   }
 
