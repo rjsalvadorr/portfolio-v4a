@@ -8,6 +8,7 @@ const PostLinks = ({posts}) => {
     <div className={mainStyles.postLinks}>
       {posts.map (({node}) => {
         const title = node.frontmatter.title || node.fields.slug;
+        const subtitle = node.frontmatter.subtitle || '';
         let thumb;
 
         if (node.frontmatter.thumbnail && node.frontmatter.thumbnail.childImageSharp) {
@@ -36,6 +37,16 @@ const PostLinks = ({posts}) => {
                   <h2 className={mainStyles.postHeading}>
                     {title}
                   </h2>
+                  <small
+                    style={{
+                      display: 'block',
+                      marginBottom: '0.2rem',
+                      marginTop: '-0.3rem',
+                      fontSize: '0.9rem',
+                    }}
+                  >
+                    {subtitle}
+                  </small>
                 </header>
                 {thumb}
               </a>
