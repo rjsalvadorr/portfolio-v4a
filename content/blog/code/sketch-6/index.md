@@ -1,7 +1,7 @@
 ---
-title: three.js exp. 1
+title: sketch no. 6
 subtitle:
-date: 2019-03-31 12:00:00
+date: 2019-06-08 12:00:00
 type: post
 category: software
 thumbnail: ./thumb.jpg
@@ -25,10 +25,10 @@ thumbnail: ./thumb.jpg
 </style>
 
 <div class="resp-container">
-  <iframe id="three-1"
+  <iframe id="sketch-6"
       class="resp-iframe"
-      title="three-1"
-      src="/three-1/index.html"
+      title="sketch-6"
+      src="/code/viz-broken-grid"
       scrolling="no">
   </iframe>
 </div>
