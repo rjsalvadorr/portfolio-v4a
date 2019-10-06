@@ -13,6 +13,8 @@ class ArtBlogPage extends React.Component {
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
 
+    console.log('artposts', JSON.stringify(posts, null, 2));
+
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Art/blog posts" />
