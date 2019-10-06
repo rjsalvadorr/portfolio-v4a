@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import visualPostLinks from '../data/visuals';
 import PostLinks from "../components/postlinks";
 import mainStyles from '../styles/main.module.css';
 
@@ -21,7 +22,8 @@ class CodePage extends React.Component {
           Currently, I'm doing a lot of work with ReactJS, VueJS, and modern JS tools.
           I typically catch up with new tech by playing around in personal projects (see below).
         </p>
-        <PostLinks posts={posts} />
+        
+        <PostLinks posts={posts} customPosts={visualPostLinks} />
         <Bio />
       </Layout>
     )

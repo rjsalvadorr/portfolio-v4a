@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import mainStyles from '../styles/main.module.css';
 
 const PostLinks = ({posts}) => {
+
   return (
     <div className={mainStyles.postLinks}>
       {posts.map (({node}) => {
@@ -11,7 +12,10 @@ const PostLinks = ({posts}) => {
         const subtitle = node.frontmatter.subtitle || '';
         let thumb;
 
-        if (node.frontmatter.thumbnail && node.frontmatter.thumbnail.childImageSharp) {
+        if (
+          node.frontmatter.thumbnail &&
+          node.frontmatter.thumbnail.childImageSharp
+        ) {
           const thumbFluid = node.frontmatter.thumbnail.childImageSharp.fluid;
           thumb = (
             <Img
@@ -33,7 +37,7 @@ const PostLinks = ({posts}) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <header style={{ marginBottom: '0.2rem' }}>
+                <header style={{marginBottom: '0.2rem'}}>
                   <h2 className={mainStyles.postHeading}>
                     {title}
                   </h2>
