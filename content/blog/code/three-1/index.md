@@ -1,9 +1,9 @@
 ---
-title: three.js exp. 3
+title: three.js exp. 1
 subtitle:
-date: 2019-04-03 12:00:00
+date: 2019-03-31 12:00:00
 type: post
-category: art
+category: software
 thumbnail: ./thumb.jpg
 ---
 
@@ -25,10 +25,10 @@ thumbnail: ./thumb.jpg
 </style>
 
 <div class="resp-container">
-  <iframe id="three-3"
+  <iframe id="three-1"
       class="resp-iframe"
-      title="three-3"
-      src="/three-3/index.html"
+      title="three-1"
+      src="/three-1/index.html"
       scrolling="no">
   </iframe>
 </div>
