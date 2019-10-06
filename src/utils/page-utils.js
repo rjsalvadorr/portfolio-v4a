@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'gatsby';
 import pages from '../data/pages'
 import mainStyles from '../styles/main.module.css';
+import moment from 'moment';
 
 export const getSection = (location) => {
   const pathArr = location.pathname.split ('/').filter (function (el) {
@@ -44,7 +45,7 @@ export const getPageDataFromSection = (section) => {
   }
 }
 
-export const createPostLink = (postData) => {
+export const renderPostLink = (postData) => {
   return (
     <article key={postData.dest} className={mainStyles.postArticle}>
       <header>
@@ -63,7 +64,7 @@ export const createPostLink = (postData) => {
             marginTop: '-0.3rem',
           }}
         >
-          {postData.date}
+          {moment(postData.date).format("MMMM DD, YYYY")}
         </small>
       </header>
       <Link to={postData.dest}>
