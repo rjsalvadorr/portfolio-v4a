@@ -10,16 +10,6 @@ class RjMesh {
     this.alive = true;
   }
 
-  applyMovements() {
-    console.log(this);
-    if(this.options.movements) {
-      const currentTime = Date.now() / 1000;
-      for(let func of this.options.movements) {
-        func(this.mesh, this.options);
-      }
-    }
-  }
-
   update() {
     if(Date.now() / 1000 > timeExpiry) {
       this.alive = false;

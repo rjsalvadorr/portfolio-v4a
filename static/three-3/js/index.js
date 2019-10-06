@@ -3,11 +3,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 const SHOW_AXIS_LINES = false;
-const SHOW_CAMERA_TARGET = true;
-const CAMERA_TARGET = new THREE.Vector3(-80, 0, 0);
-
-const STAR_RADIUS = 60;
-const UPDATES_PER_SECOND = 24;
+const NUM_STARS = 100;
+const CAMERA_POS = new THREE.Vector3(-15, 10, -40);
+const STAR_SOURCE_POS = new THREE.Vector3(0, 5, 50);
 
 ///////////////////////////////////////////////////////////////////////////////
 //   THREE.JS ESSENTIALS
@@ -18,10 +16,10 @@ let camera = new THREE.PerspectiveCamera (
   45,
   window.innerWidth / window.innerHeight,
   1,
-  1000
+  3000
 );
-camera.position.set (STAR_RADIUS * 1.5, STAR_RADIUS * -0.5, STAR_RADIUS * 1.5);
-camera.lookAt (CAMERA_TARGET);
+camera.position.set (CAMERA_POS.x, CAMERA_POS.y, CAMERA_POS.z);
+camera.lookAt (scene.position);
 
 let renderer = new THREE.WebGLRenderer ({antialias: true});
 renderer.setSize (window.innerWidth, window.innerHeight);
@@ -37,42 +35,84 @@ if (SHOW_AXIS_LINES) {
   scene.add (axesHelper);
 }
 
-if (SHOW_CAMERA_TARGET) {
-  const targetHelperGeo = new THREE.SphereGeometry (5);
-  const targetHelperMat = new THREE.LineBasicMaterial ({
-    color: 0xf0ff00,
-    lights: false,
-  });
-  const targetHelper = new THREE.Mesh (targetHelperGeo, targetHelperMat);
-  targetHelper.position.set(CAMERA_TARGET);
-  scene.add (targetHelper);
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 //   MAIN OBJECTS
 ///////////////////////////////////////////////////////////////////////////////
 
-// Creating stars
-const globeGeometry = new THREE.IcosahedronGeometry (STAR_RADIUS, 2);
+// Creating projectiles
+let shootingStars = [];
 
-const starGroup = new THREE.Group ();
-const starGeometry = new THREE.SphereGeometry (1);
-const starMaterial = new THREE.LineBasicMaterial ({
-  color: 0xdd0000,
-  lights: false,
-});
-let newStar;
-let starCoords;
-for (let starPos of globeGeometry.vertices) {
-  newStar = new THREE.Mesh (starGeometry, starMaterial);
+const createNewShootingStar = (velocity = 3, accel = 2) => {
+  const cirlceDerp = getRandomCircleCoords(30);
+  const newShootingStarGeo = new THREE.BoxGeometry (0.1, 0.1, 6);
+  const newShootingStarMat = new THREE.LineBasicMaterial ({
+    color: 0xffffff,
+    lights: false,
+  });
+  const newShootingStar = new RjLaser(
+    new THREE.Mesh(newShootingStarGeo, newShootingStarMat),
+    STAR_SOURCE_POS,
+    // new THREE.Vector3(getRandomInt(-10, 10), getRandomInt(-10, 20), getRandomInt(-10, 30)),
+    new THREE.Vector3(cirlceDerp.x, cirlceDerp.y, 0),
+    velocity,
+    accel,
+  );
 
-  newStar.position.setX (starPos.x);
-  newStar.position.setY (starPos.y);
-  newStar.position.setZ (starPos.z);
-
-  starGroup.add (newStar);
+  return newShootingStar;
 }
-scene.add (starGroup);
+
+// Creating ships
+const ships = [];
+const loader = new THREE.GLTFLoader ();
+let newShip;
+loader.load (
+  'models/low_poly_space_ship/scene.gltf',
+  function (gltf) {
+    const shippyShip = gltf.scene.children[0];
+
+    newShip = new RjMesh (shippyShip, 99999, {});
+    newShip.mesh.scale.set (3, 3, 3);
+    ships.push (newShip);
+    scene.add (newShip.mesh);
+
+    newShip = new RjMesh (shippyShip.clone (true), 99999, {});
+    newShip.mesh.scale.set (3, 3, 3);
+    newShip.mesh.position.set (10, 0, 0);
+    ships.push (newShip);
+    scene.add (newShip.mesh);
+
+    newShip = new RjMesh (shippyShip.clone (true), 99999, {});
+    newShip.mesh.scale.set (3, 3, 3);
+    newShip.mesh.position.set (0, 0, 10);
+    ships.push (newShip);
+    scene.add (newShip.mesh);
+  },
+  undefined,
+  function (error) {
+    console.error (error);
+  }
+);
+
+const NUM_SHIPS = 3;
+
+const randomPeriods = [
+  getRandomInt (3, 8),
+  getRandomInt (3, 8),
+  getRandomInt (3, 8),
+  getRandomInt (4, 10),
+  getRandomInt (4, 10),
+  getRandomInt (4, 10),
+  getRandomInt (4, 10),
+  getRandomInt (4, 10),
+  getRandomInt (4, 10),
+];
+
+const randomDistances = [];
+let randomRange;
+for (let i = 0; i < NUM_SHIPS * 3; i++) {
+  randomDist = getRandomInt (-3, 0);
+  randomDistances.push ([randomDist, Math.abs (randomDist)]);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //   MAIN RENDER/UPDATE LOOPS
@@ -80,13 +120,65 @@ scene.add (starGroup);
 
 // Update loop
 let startTime = Date.now () / 1000;
+
 window.setInterval (function () {
   const currentTime = Date.now () / 1000;
 
-  // Rotate star globe
-  starGroup.rotateY (Math.PI / 180);
-  starGroup.rotateZ (Math.PI / 360);
-}, 1000 / UPDATES_PER_SECOND);
+  // Move ship
+  const shipVerticalCoords = [
+    periodicFunction (currentTime, randomPeriods[0], 0, 5),
+    periodicFunction (currentTime, randomPeriods[1], -10, -5),
+    periodicFunction (currentTime, randomPeriods[2], 10, 15),
+  ];
+  const shipXCoords = [
+    periodicFunction (currentTime, randomPeriods[3], 0, 3),
+    periodicFunction (currentTime, randomPeriods[4], -12, -5),
+    periodicFunction (currentTime, randomPeriods[5], 12, 15),
+  ];
+  const shipZCoords = [
+    periodicFunction (currentTime, randomPeriods[3], 0, 3),
+    periodicFunction (currentTime, randomPeriods[4], -12, -5),
+    periodicFunction (currentTime, randomPeriods[5], 12, 15),
+  ];
+
+  if (!_.isEmpty (ships)) {
+    ships[0].mesh.position.setY (shipVerticalCoords[0]);
+    ships[1].mesh.position.setY (shipVerticalCoords[1]);
+    ships[2].mesh.position.setY (shipVerticalCoords[2]);
+
+    ships[0].mesh.position.setX (shipXCoords[0]);
+    ships[1].mesh.position.setX (shipXCoords[1]);
+    ships[2].mesh.position.setX (shipXCoords[2]);
+
+    ships[0].mesh.position.setZ (shipZCoords[0]);
+    ships[1].mesh.position.setZ (shipZCoords[1]);
+    ships[2].mesh.position.setZ (shipZCoords[2]);
+  }
+
+  // managing shooting stars
+  for(let shootingStar of shootingStars) {
+    shootingStar.update();
+  }
+  shootingStars = _.filter(shootingStars, (sstar) => {
+    return sstar.alive === true;
+  });
+}, 1000 / 24);
+
+window.setInterval (function () {
+  if(shootingStars.length < NUM_STARS) {
+    const newStarrs = [
+      createNewShootingStar(4, 2),
+      createNewShootingStar(4, 2),
+      createNewShootingStar(4, 2),
+      createNewShootingStar(4, 2),
+      createNewShootingStar(4, 2),
+    ];
+    for(sstar of newStarrs) {
+      shootingStars.push(sstar);
+      scene.add(sstar.mesh);
+    }
+  }
+}, 50);
 
 // Render loop
 let render = function () {
