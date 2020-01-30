@@ -41,7 +41,7 @@ class RisingPillars extends React.Component {
     const GRID_WIDTH = 5;
     const GRID_LENGTH = 5;
     const GRID_UNIT_LENGTH = 10;
-    const GRID_GUTTER_SIZE = 1.5;
+    const GRID_GUTTER_SIZE = 5;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -70,16 +70,21 @@ class RisingPillars extends React.Component {
     const gridBoxGroup = new THREE.Group ();
     let gridBoxGeometry;
     let gridBoxMaterial;
+
     const lightest = '337a99';
     const darkest = chroma (lightest).darken (3);
     const colorScale = chroma.scale ([darkest, lightest]);
     this.renderer.setClearColor (chroma (lightest).darken (4).num (), 1);
+
     const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
+
     let sceneLength = gridUnitWithGutter * GRID_LENGTH;
     let sceneWidth = gridUnitWithGutter * GRID_WIDTH;
+
     let newHeight;
     let newBox;
     let boxHeights;
+
     for (let i = 0; i < GRID_LENGTH; i++) {
       boxes[i] = [];
       boxHeights = utils.splitRough (GRID_WIDTH * 6, GRID_WIDTH, 3.5);
@@ -104,7 +109,9 @@ class RisingPillars extends React.Component {
         gridBoxGroup.add (newBox);
       }
     }
+
     scene.add (gridBoxGroup);
+
     const newCameraTarget = new THREE.Vector3 (
       sceneLength / 2,
       0,
@@ -118,6 +125,7 @@ class RisingPillars extends React.Component {
     const cameraHeight = 18;
     const rotationPeriod = 32;
     const rotationRadius = 23;
+    
     this.intervalId = window.setInterval (function () {
       const currentTime = Date.now () / 1000;
       const circCoords = utils.circleFunction (

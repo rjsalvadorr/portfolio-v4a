@@ -2,7 +2,7 @@ import React from 'react';
 import {graphql} from 'gatsby';
 
 import Layout from '../../components/layout';
-import RisingPillars from '../../components/visualizations/three-city';
+import RisingPillars from '../../components/visualizations/rising-pillars';
 import vizStyles from '../../styles/visualizations.module.css';
 
 class RisingPillarsFeature extends React.Component {
