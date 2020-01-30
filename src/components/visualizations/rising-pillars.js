@@ -4,6 +4,7 @@ import sample from 'lodash/sample';
 import chroma from 'chroma-js';
 
 import utils from './utils/three-utils';
+import FuzzyGrid from './utils/fuzzy-grid';
 
 class RisingPillars extends React.Component {
   constructor (props) {
@@ -38,10 +39,12 @@ class RisingPillars extends React.Component {
 
     const LIGHT_POS = new THREE.Vector3 (1, 5, 1);
     const UPDATES_PER_SECOND = 24;
-    const GRID_WIDTH = 5;
-    const GRID_LENGTH = 5;
-    const CYLINDER_DIAMETER = 8;
-    const GRID_GUTTER_SIZE = 2.5;
+    const GRID_WIDTH = 60;
+    const GRID_LENGTH = 60;
+    const GRID_UNIT_WIDTH = 12;
+    const GRID_UNIT_LENGTH = 12;
+    const CYLINDER_DIAMETER = 4;
+    const GRID_GUTTER_SIZE = 2;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -58,60 +61,57 @@ class RisingPillars extends React.Component {
       this.pillarsRef.current.clientHeight
     );
     this.pillarsRef.current.appendChild(this.renderer.domElement);
-    let light = new THREE.DirectionalLight ('white', 0.8);
+    let light = new THREE.DirectionalLight ('white', 0.9);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
-
-    ///////////////////////////////////////////////////////////////////////////////
-    //   MAIN OBJECTS
-
-    // Creating pillars
-    const pillars = [];
-    const pillarGroup = new THREE.Group ();
-    let pillarGeometry;
-    let pillarMaterial;
 
     const lightest = '337a99';
     const darkest = chroma (lightest).darken (3);
     const colorScale = chroma.scale ([darkest, lightest]);
     this.renderer.setClearColor (chroma (lightest).darken (4).num (), 1);
 
-    const gridUnitWithGutter = CYLINDER_DIAMETER + GRID_GUTTER_SIZE;
+    ///////////////////////////////////////////////////////////////////////////////
+    //   MAIN OBJECTS
 
-    let sceneLength = gridUnitWithGutter * GRID_LENGTH;
-    let sceneWidth = gridUnitWithGutter * GRID_WIDTH;
-
+    // Creating pillars
+    const pillarGroup = new THREE.Group ();
     let newHeight;
     let newPillar;
     let pillarHeights;
+    let pillarGeometry;
+    let pillarMaterial;
 
-    for (let i = 0; i < GRID_LENGTH; i++) {
-      pillars[i] = [];
-      pillarHeights = utils.splitRough (GRID_WIDTH * 6, GRID_WIDTH, 3.5);
-      for (let j = 0; j < GRID_WIDTH; j++) {
-        newHeight = pillarHeights[j];
-        pillarGeometry = new THREE.CylinderBufferGeometry (
-          CYLINDER_DIAMETER / 2,
-          CYLINDER_DIAMETER / 2,
-          newHeight,
-          32
-        );
-        pillarMaterial = new THREE.MeshLambertMaterial ({
-          color: colorScale (
-            sample ([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
-          ).hex (),
-          flatShading: true,
-        });
-        newPillar = new THREE.Mesh (pillarGeometry, pillarMaterial);
-        newPillar.position.setX (i * gridUnitWithGutter);
-        newPillar.position.setY (newHeight / 2);
-        newPillar.position.setZ (j * gridUnitWithGutter);
-        pillars[i].push (newPillar);
-        pillarGroup.add (newPillar);
-      }
+    // constructor ignores length
+    const pillarConstructor = (x, y, width) => {
+      newHeight = 8 * Math.random();
+      pillarGeometry = new THREE.CylinderBufferGeometry (
+        width / 13,
+        width / 13,
+        newHeight,
+        16
+      );
+      pillarMaterial = new THREE.MeshLambertMaterial ({
+        color: colorScale (
+          sample ([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+        ).hex (),
+        flatShading: true,
+      });
+      newPillar = new THREE.Mesh (pillarGeometry, pillarMaterial);
+      newPillar.position.setX (x);
+      newPillar.position.setY (newHeight / 2);
+      newPillar.position.setZ (y);
+      return newPillar;
     }
 
+    const pillarGrid = new FuzzyGrid(pillarConstructor, GRID_WIDTH, GRID_LENGTH, GRID_UNIT_WIDTH, GRID_UNIT_LENGTH);
+    pillarGrid.list.forEach(pillar => {
+      console.log(pillar);
+      pillarGroup.add(pillar);
+    });
     scene.add (pillarGroup);
+
+    let sceneLength = GRID_LENGTH;
+    let sceneWidth = GRID_WIDTH;
 
     const newCameraTarget = new THREE.Vector3 (
       sceneLength / 2,
