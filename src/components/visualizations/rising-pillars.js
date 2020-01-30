@@ -8,7 +8,7 @@ import utils from './utils/three-utils';
 class RisingPillars extends React.Component {
   constructor (props) {
     super (props);
-    this.cityRef = React.createRef ();
+    this.pillarsRef = React.createRef ();
   }
 
   render () {
@@ -16,7 +16,7 @@ class RisingPillars extends React.Component {
       <div className="rising-pillars-wrapper-wrapper">
         <div
           className="rising-pillars-wrapper"
-          ref={this.cityRef}
+          ref={this.pillarsRef}
           style={{
             position: 'absolute',
             top: 0,
@@ -37,11 +37,11 @@ class RisingPillars extends React.Component {
     //   CONSTANTS
 
     const LIGHT_POS = new THREE.Vector3 (1, 5, 1);
-    const UPDATES_PER_SECOND = 20;
+    const UPDATES_PER_SECOND = 24;
     const GRID_WIDTH = 5;
     const GRID_LENGTH = 5;
-    const GRID_UNIT_LENGTH = 10;
-    const GRID_GUTTER_SIZE = 5;
+    const CYLINDER_DIAMETER = 8;
+    const GRID_GUTTER_SIZE = 2.5;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -49,15 +49,15 @@ class RisingPillars extends React.Component {
     let scene = new THREE.Scene ();
     let camera = new THREE.PerspectiveCamera (
       45,
-      this.cityRef.current.clientWidth / this.cityRef.current.clientHeight,
+      this.pillarsRef.current.clientWidth / this.pillarsRef.current.clientHeight,
       1,
       1000
     );
     this.renderer.setSize (
-      this.cityRef.current.clientWidth,
-      this.cityRef.current.clientHeight
+      this.pillarsRef.current.clientWidth,
+      this.pillarsRef.current.clientHeight
     );
-    this.cityRef.current.appendChild(this.renderer.domElement);
+    this.pillarsRef.current.appendChild(this.renderer.domElement);
     let light = new THREE.DirectionalLight ('white', 0.8);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
@@ -65,52 +65,53 @@ class RisingPillars extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
 
-    // Creating boxes
-    const boxes = [];
-    const gridBoxGroup = new THREE.Group ();
-    let gridBoxGeometry;
-    let gridBoxMaterial;
+    // Creating pillars
+    const pillars = [];
+    const pillarGroup = new THREE.Group ();
+    let pillarGeometry;
+    let pillarMaterial;
 
     const lightest = '337a99';
     const darkest = chroma (lightest).darken (3);
     const colorScale = chroma.scale ([darkest, lightest]);
     this.renderer.setClearColor (chroma (lightest).darken (4).num (), 1);
 
-    const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
+    const gridUnitWithGutter = CYLINDER_DIAMETER + GRID_GUTTER_SIZE;
 
     let sceneLength = gridUnitWithGutter * GRID_LENGTH;
     let sceneWidth = gridUnitWithGutter * GRID_WIDTH;
 
     let newHeight;
-    let newBox;
-    let boxHeights;
+    let newPillar;
+    let pillarHeights;
 
     for (let i = 0; i < GRID_LENGTH; i++) {
-      boxes[i] = [];
-      boxHeights = utils.splitRough (GRID_WIDTH * 6, GRID_WIDTH, 3.5);
+      pillars[i] = [];
+      pillarHeights = utils.splitRough (GRID_WIDTH * 6, GRID_WIDTH, 3.5);
       for (let j = 0; j < GRID_WIDTH; j++) {
-        newHeight = boxHeights[j];
-        gridBoxGeometry = new THREE.BoxBufferGeometry (
-          GRID_UNIT_LENGTH,
+        newHeight = pillarHeights[j];
+        pillarGeometry = new THREE.CylinderBufferGeometry (
+          CYLINDER_DIAMETER / 2,
+          CYLINDER_DIAMETER / 2,
           newHeight,
-          GRID_UNIT_LENGTH
+          32
         );
-        gridBoxMaterial = new THREE.MeshLambertMaterial ({
+        pillarMaterial = new THREE.MeshLambertMaterial ({
           color: colorScale (
             sample ([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
           ).hex (),
           flatShading: true,
         });
-        newBox = new THREE.Mesh (gridBoxGeometry, gridBoxMaterial);
-        newBox.position.setX (i * gridUnitWithGutter);
-        newBox.position.setY (newHeight / 2);
-        newBox.position.setZ (j * gridUnitWithGutter);
-        boxes[i].push (newBox);
-        gridBoxGroup.add (newBox);
+        newPillar = new THREE.Mesh (pillarGeometry, pillarMaterial);
+        newPillar.position.setX (i * gridUnitWithGutter);
+        newPillar.position.setY (newHeight / 2);
+        newPillar.position.setZ (j * gridUnitWithGutter);
+        pillars[i].push (newPillar);
+        pillarGroup.add (newPillar);
       }
     }
 
-    scene.add (gridBoxGroup);
+    scene.add (pillarGroup);
 
     const newCameraTarget = new THREE.Vector3 (
       sceneLength / 2,
@@ -125,7 +126,7 @@ class RisingPillars extends React.Component {
     const cameraHeight = 18;
     const rotationPeriod = 32;
     const rotationRadius = 23;
-    
+
     this.intervalId = window.setInterval (function () {
       const currentTime = Date.now () / 1000;
       const circCoords = utils.circleFunction (
@@ -154,7 +155,7 @@ class RisingPillars extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
 
-    const canvasElement = this.cityRef.current;
+    const canvasElement = this.pillarsRef.current;
     function resizeRenderer (evt) {
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
       that.renderer.setSize (
