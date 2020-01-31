@@ -48,12 +48,6 @@ class FuzzyGrid {
     const unitLength = length / (xUnits + 1);
 
     let objRow;
-    let objParams = {
-      x: 0,
-      y: 0,
-      width: 0,
-      length: 0,
-    }
     let newObj;
     
     for(let i = 1; i <= xUnits + 1; i++) {
@@ -96,7 +90,7 @@ class FuzzyGrid {
   }
   
   apply(func) {
-    for(let obj of this._initList) {
+    for(let obj of this.list) {
       func(obj)
     }
   }

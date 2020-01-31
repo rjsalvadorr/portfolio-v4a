@@ -1,7 +1,7 @@
 
 import sample from 'lodash/sample';
 import shuffle from 'lodash/shuffle';
-import {Vector3} from 'three';
+import { Vector3 } from 'three';
 
 ///////////////////////////////////////////////////////////////////////////////
 //   UTILS

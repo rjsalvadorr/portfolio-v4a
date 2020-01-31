@@ -5,6 +5,10 @@ import chroma from 'chroma-js';
 
 import utils from './utils/three-utils';
 import FuzzyGrid from './utils/fuzzy-grid';
+import {
+  getDistFromTwoPoints,
+  sigmoid3
+} from './utils/math-utils';
 
 class RisingPillars extends React.Component {
   constructor (props) {
@@ -39,12 +43,15 @@ class RisingPillars extends React.Component {
 
     const LIGHT_POS = new THREE.Vector3 (1, 5, 1);
     const UPDATES_PER_SECOND = 24;
-    const GRID_WIDTH = 60;
-    const GRID_LENGTH = 60;
+    const GRID_WIDTH = 70;
+    const GRID_LENGTH = 70;
     const GRID_UNIT_WIDTH = 12;
     const GRID_UNIT_LENGTH = 12;
-    const CYLINDER_DIAMETER = 4;
-    const GRID_GUTTER_SIZE = 2;
+    const PILLAR_BASE_HEIGHT = 6;
+    const WAVE_CENTER_POINT = {
+      x: 800,
+      y: 800,
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -61,11 +68,11 @@ class RisingPillars extends React.Component {
       this.pillarsRef.current.clientHeight
     );
     this.pillarsRef.current.appendChild(this.renderer.domElement);
-    let light = new THREE.DirectionalLight ('white', 0.9);
+    let light = new THREE.DirectionalLight ('white', 1);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
 
-    const lightest = '337a99';
+    const lightest = '4787a3';
     const darkest = chroma (lightest).darken (3);
     const colorScale = chroma.scale ([darkest, lightest]);
     this.renderer.setClearColor (chroma (lightest).darken (4).num (), 1);
@@ -77,17 +84,36 @@ class RisingPillars extends React.Component {
     const pillarGroup = new THREE.Group ();
     let newHeight;
     let newPillar;
-    let pillarHeights;
     let pillarGeometry;
     let pillarMaterial;
 
+    class AnimationClock {
+      constructor(period) {
+        this.period = period ? period : 1;
+      }
+      
+      /**
+      * Simple sine oscillator. 
+      *
+      * @param {number} inputOffset - offset value added to timestamp (seconds)
+      * @return {number} A number between 0 and 1
+      */
+      getValue(inputOffset = 0) {
+        const currentTime = Date.now() / 1000;
+        const cosArg = (currentTime + inputOffset) * Math.PI / (this.period / 2);
+        const amplitude = 0.5;
+        return Math.cos(cosArg) * -amplitude + amplitude;
+      }
+    }
+
+    const clock = new AnimationClock(3);
+
     // constructor ignores length
     const pillarConstructor = (x, y, width) => {
-      newHeight = 8 * Math.random();
       pillarGeometry = new THREE.CylinderBufferGeometry (
         width / 13,
         width / 13,
-        newHeight,
+        PILLAR_BASE_HEIGHT,
         16
       );
       pillarMaterial = new THREE.MeshLambertMaterial ({
@@ -98,7 +124,7 @@ class RisingPillars extends React.Component {
       });
       newPillar = new THREE.Mesh (pillarGeometry, pillarMaterial);
       newPillar.position.setX (x);
-      newPillar.position.setY (newHeight / 2);
+      newPillar.position.setY (PILLAR_BASE_HEIGHT / 2);
       newPillar.position.setZ (y);
       return newPillar;
     }
@@ -123,11 +149,24 @@ class RisingPillars extends React.Component {
     //   MAIN RENDER/UPDATE LOOPS
 
     // Update loop
-    const cameraHeight = 18;
-    const rotationPeriod = 32;
+    const cameraHeight = 20;
+    const rotationPeriod = 40;
     const rotationRadius = 23;
 
     this.intervalId = window.setInterval (function () {
+      const baseScale = (clock.getValue() * 1.5) + 0.25;
+      pillarGrid.apply((pillar) => {
+        const pillarPos = {
+          x: pillar.position.x,
+          y: pillar.position.z,
+        }
+        const clockOffset = getDistFromTwoPoints(pillarPos, WAVE_CENTER_POINT) / 40;
+        const scaleMultiplier = clock.getValue(clockOffset) + 0.25;
+        const newScale = baseScale * scaleMultiplier
+        pillar.scale.set(1, newScale, 1);
+        pillar.position.setY(newScale * PILLAR_BASE_HEIGHT * 0.5);
+      });
+
       const currentTime = Date.now () / 1000;
       const circCoords = utils.circleFunction (
         currentTime,

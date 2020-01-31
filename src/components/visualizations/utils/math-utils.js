@@ -19,3 +19,7 @@ export const sigmoid3 = (input) => {
   const funcRes = 1 / (1 + Math.pow(Math.E, exponent));
   return funcRes * input;
 }
+
+export const getDistFromTwoPoints = (pt1, pt2) => {
+  return Math.sqrt(Math.pow(pt2.x - pt1.x, 2) + Math.pow(pt2.y - pt1.y, 2));
+};
