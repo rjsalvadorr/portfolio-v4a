@@ -29,7 +29,8 @@ class Obj {
     const maxDist = this.l > this.w ? this.w : this.l;
     const getRandomPointNearby = (input) => {
       // input is between 0 and 1
-      const res = (2 * input - 1) / Math.sqrt(2);
+      const limitedInput = input * 0.5;
+      const res = (2 * limitedInput - 1) / Math.sqrt(2);
       return res * maxDist;
     }
     this.x = this.x + getRandomPointNearby(input);

@@ -5,10 +5,7 @@ import chroma from 'chroma-js';
 
 import utils from './utils/three-utils';
 import FuzzyGrid from './utils/fuzzy-grid';
-import {
-  getDistFromTwoPoints,
-  sigmoid3
-} from './utils/math-utils';
+import { radialWave3 } from './utils/wave-utils';
 
 class RisingPillars extends React.Component {
   constructor (props) {
@@ -43,15 +40,23 @@ class RisingPillars extends React.Component {
 
     const LIGHT_POS = new THREE.Vector3 (1, 5, 1);
     const UPDATES_PER_SECOND = 24;
-    const GRID_WIDTH = 70;
-    const GRID_LENGTH = 70;
-    const GRID_UNIT_WIDTH = 12;
-    const GRID_UNIT_LENGTH = 12;
-    const PILLAR_BASE_HEIGHT = 6;
+    const GRID_WIDTH = 360;
+    const GRID_LENGTH = 360;
+    const GRID_UNIT_WIDTH = 20;
+    const GRID_UNIT_LENGTH = 20;
+    const PILLAR_BASE_HEIGHT = 25;
     const WAVE_CENTER_POINT = {
-      x: 800,
-      y: 800,
-    }
+      x: -900,
+      y: 1878,
+    };
+    const CAMERA_HEIGHT = 110;
+    const CAMERA_ROTATION_PERIOD = 75;
+    const CAMERA_ROTATION_RADIUS = 110;
+    const CAMERA_TARGET = new THREE.Vector3 (
+      GRID_LENGTH / 2,
+      -5,
+      GRID_WIDTH / 2
+    );
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -72,17 +77,17 @@ class RisingPillars extends React.Component {
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
 
-    const lightest = '4787a3';
+    const lightest = '7eabbe';
     const darkest = chroma (lightest).darken (3);
     const colorScale = chroma.scale ([darkest, lightest]);
-    this.renderer.setClearColor (chroma (lightest).darken (4).num (), 1);
+    const backgroundCol = chroma('#a0753f').num();
+    this.renderer.setClearColor(backgroundCol, 1);
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
 
     // Creating pillars
     const pillarGroup = new THREE.Group ();
-    let newHeight;
     let newPillar;
     let pillarGeometry;
     let pillarMaterial;
@@ -106,13 +111,13 @@ class RisingPillars extends React.Component {
       }
     }
 
-    const clock = new AnimationClock(3);
-
     // constructor ignores length
     const pillarConstructor = (x, y, width) => {
+      const radiusPadding = Math.random() * 4;
+      const radius = width / 13 + radiusPadding;
       pillarGeometry = new THREE.CylinderBufferGeometry (
-        width / 13,
-        width / 13,
+        radius,
+        radius,
         PILLAR_BASE_HEIGHT,
         16
       );
@@ -131,55 +136,48 @@ class RisingPillars extends React.Component {
 
     const pillarGrid = new FuzzyGrid(pillarConstructor, GRID_WIDTH, GRID_LENGTH, GRID_UNIT_WIDTH, GRID_UNIT_LENGTH);
     pillarGrid.list.forEach(pillar => {
-      console.log(pillar);
       pillarGroup.add(pillar);
     });
     scene.add (pillarGroup);
 
-    let sceneLength = GRID_LENGTH;
-    let sceneWidth = GRID_WIDTH;
-
-    const newCameraTarget = new THREE.Vector3 (
-      sceneLength / 2,
-      0,
-      sceneWidth / 2
-    );
-
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN RENDER/UPDATE LOOPS
 
-    // Update loop
-    const cameraHeight = 20;
-    const rotationPeriod = 40;
-    const rotationRadius = 23;
+    const clock = new AnimationClock(4);
 
     this.intervalId = window.setInterval (function () {
-      const baseScale = (clock.getValue() * 1.5) + 0.25;
+      const currentTime = Date.now () / 1000;
+
       pillarGrid.apply((pillar) => {
+        const pillarPosMultiplier = 0.01;
         const pillarPos = {
-          x: pillar.position.x,
-          y: pillar.position.z,
+          x: pillar.position.x * pillarPosMultiplier,
+          y: pillar.position.z * pillarPosMultiplier,
         }
-        const clockOffset = getDistFromTwoPoints(pillarPos, WAVE_CENTER_POINT) / 40;
-        const scaleMultiplier = clock.getValue(clockOffset) + 0.25;
-        const newScale = baseScale * scaleMultiplier
+        const scaleMultiplier = radialWave3(
+          WAVE_CENTER_POINT,
+          pillarPos,
+          currentTime,
+        );
+        const wave1 = scaleMultiplier;
+        const wave2 = clock.getValue() * 0.6 + 0.4;
+        const newScale = wave1 * wave2 + 0.25;
         pillar.scale.set(1, newScale, 1);
-        pillar.position.setY(newScale * PILLAR_BASE_HEIGHT * 0.5);
+        pillar.position.setY(newScale / 2 * PILLAR_BASE_HEIGHT);
       });
 
-      const currentTime = Date.now () / 1000;
-      const circCoords = utils.circleFunction (
+      const cameraCoords = utils.circleFunction (
         currentTime,
-        rotationPeriod,
-        rotationRadius
+        CAMERA_ROTATION_PERIOD,
+        CAMERA_ROTATION_RADIUS
       );
       const cameraPos = new THREE.Vector3 (
-        circCoords.x + sceneLength / 2,
-        cameraHeight,
-        circCoords.y + sceneWidth / 2
+        cameraCoords.x + GRID_LENGTH / 2,
+        CAMERA_HEIGHT,
+        cameraCoords.y + GRID_WIDTH / 2
       );
       camera.position.set (cameraPos.x, cameraPos.y, cameraPos.z);
-      camera.lookAt (newCameraTarget);
+      camera.lookAt (CAMERA_TARGET);
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
