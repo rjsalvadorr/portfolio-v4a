@@ -1,4 +1,3 @@
-
 import sample from 'lodash/sample';
 import shuffle from 'lodash/shuffle';
 import {Vector3} from 'three';
@@ -18,22 +17,22 @@ const splitNumber = (value, numSplits, discreteVals = true) => {
   let randyVal;
 
   for (let i = 0; i < numPoints; i++) {
-    randyVal = Math.random();
-    points.push(randyVal * value);
+    randyVal = Math.random ();
+    points.push (randyVal * value);
   }
 
-  points.sort(function (a, b) {
+  points.sort (function (a, b) {
     return a - b;
   });
   if (discreteVals) {
-    points.push(value);
+    points.push (value);
   }
 
   for (let j = 0; j < points.length; j++) {
     if (j === 0) {
-      result.push(points[j]);
+      result.push (points[j]);
     } else {
-      result.push(points[j] - points[j - 1]);
+      result.push (points[j] - points[j - 1]);
     }
   }
   return result;
@@ -49,7 +48,7 @@ const splitRough = (valToSplit, numSplit, min, discreteVals = true) => {
   }
   const roughArr = [];
   const shareables = valToSplit - min * numSplit;
-  const shareableSplit = splitNumber(shareables, numSplit, discreteVals);
+  const shareableSplit = splitNumber (shareables, numSplit, discreteVals);
   let arrVal;
   for (let i = 0; i < numSplit; i++) {
     if (!discreteVals && i !== 0) {
@@ -57,9 +56,9 @@ const splitRough = (valToSplit, numSplit, min, discreteVals = true) => {
     } else {
       arrVal = min + shareableSplit[i];
     }
-    roughArr.push(arrVal);
+    roughArr.push (arrVal);
   }
-  return discreteVals ? roughArr : shuffle(roughArr);
+  return discreteVals ? roughArr : shuffle (roughArr);
 };
 
 /**
@@ -70,9 +69,9 @@ const splitRough = (valToSplit, numSplit, min, discreteVals = true) => {
  * Using Math.round() will give you a non-uniform distribution!
  */
 const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  min = Math.ceil (min);
+  max = Math.floor (max);
+  return Math.floor (Math.random () * (max - min + 1)) + min;
 };
 
 /**
@@ -87,7 +86,7 @@ const getRandomInt = (min, max) => {
 const periodicFunction = (x, period, minValue, maxValue) => {
   const cosArg = x * Math.PI / (period / 2);
   const amplitude = (maxValue - minValue) / 2;
-  return Math.cos(cosArg) * -amplitude + (amplitude + minValue);
+  return Math.cos (cosArg) * -amplitude + (amplitude + minValue);
 };
 
 /**
@@ -97,27 +96,27 @@ const periodicFunction = (x, period, minValue, maxValue) => {
 */
 const circleFunction = (input, period, radius) => {
   const inputArg = input * Math.PI / (period / 2);
-  const yCoord = Math.sin(inputArg) * radius;
-  const xCoord = Math.cos(inputArg) * radius;
+  const yCoord = Math.sin (inputArg) * radius;
+  const xCoord = Math.cos (inputArg) * radius;
   return {
     x: xCoord,
     y: yCoord,
-  }
+  };
 };
 
 /**
 * Returns a set of coords (x, y, z) representing a point on a sphere
 * with the given radius. The sphere is centered at (0, 0, 0)
 */
-const getRandomSphereCoordinate = (radius) => {
-  const xyCoords = circleFunction(getRandomInt(0, 100), 100, radius);
-  const xRadius = Math.abs(xyCoords.x);
-  const xzCoords = circleFunction(getRandomInt(0, 100), 100, xRadius);
+const getRandomSphereCoordinate = radius => {
+  const xyCoords = circleFunction (getRandomInt (0, 100), 100, radius);
+  const xRadius = Math.abs (xyCoords.x);
+  const xzCoords = circleFunction (getRandomInt (0, 100), 100, xRadius);
   return {
     x: xzCoords.x,
     y: xyCoords.y,
     z: xzCoords.y,
-  }
+  };
 };
 
 /**
@@ -125,28 +124,27 @@ const getRandomSphereCoordinate = (radius) => {
 * with the given radius. The cylinder is centered at (0, 0, 0)
 */
 const getRandomCylinderCoordinate = (radius, height) => {
-  const xzCoords = circleFunction(getRandomInt(0, 100), 100, radius);
-  const halfHeight = height / 2
-  const yCoord = getRandomInt(-halfHeight, halfHeight);
+  const xzCoords = circleFunction (getRandomInt (0, 100), 100, radius);
+  const halfHeight = height / 2;
+  const yCoord = getRandomInt (-halfHeight, halfHeight);
   return {
     x: xzCoords.x,
     y: yCoord,
     z: xzCoords.y,
-  }
+  };
 };
 
 /**
 * Returns a random normalized vector.
 */
 const getRandomVector = () => {
-  const newVector = new Vector3(
-    getRandomInt(-5, 5),
-    getRandomInt(-5, 5),
-    getRandomInt(-5, 5),
+  const newVector = new Vector3 (
+    getRandomInt (-5, 5),
+    getRandomInt (-5, 5),
+    getRandomInt (-5, 5)
   );
-  return newVector.normalize();
-}
-
+  return newVector.normalize ();
+};
 
 /**
 * Returns a list of evenly-distributed random coords
@@ -155,9 +153,11 @@ const getRandomVector = () => {
 const randomizeEvenly = (numPoints, box) => {
   // get the cube root of numPoints. The box is divided
   // into even sections using this number.
-  const cubedPoints = Math.cbrt(numPoints);
-  if (!Number.isInteger(cubedPoints)) {
-    throw new Error("randomizeEvenly() requires a cubic integer (like 8, 27, 64)");
+  const cubedPoints = Math.cbrt (numPoints);
+  if (!Number.isInteger (cubedPoints)) {
+    throw new Error (
+      'randomizeEvenly() requires a cubic integer (like 8, 27, 64)'
+    );
   }
 
   const coords = [];
@@ -166,13 +166,28 @@ const randomizeEvenly = (numPoints, box) => {
   let xCoords;
 
   for (let i = 0; i < cubedPoints; i++) {
-    xCoords = splitRough(box.x, cubedPoints, (box.x / cubedPoints * 0.45), false);
-    yCoords = splitRough(box.y, cubedPoints, (box.y / cubedPoints * 0.45), false);
+    xCoords = splitRough (
+      box.x,
+      cubedPoints,
+      box.x / cubedPoints * 0.45,
+      false
+    );
+    yCoords = splitRough (
+      box.y,
+      cubedPoints,
+      box.y / cubedPoints * 0.45,
+      false
+    );
     for (let yCoord of yCoords) {
-      zCoords = splitRough(box.z, cubedPoints, (box.z / cubedPoints * 0.45), false);
+      zCoords = splitRough (
+        box.z,
+        cubedPoints,
+        box.z / cubedPoints * 0.45,
+        false
+      );
       for (let zCoord of zCoords) {
-        coords.push({
-          x: sample(xCoords),
+        coords.push ({
+          x: sample (xCoords),
           y: yCoord,
           z: zCoord,
         });
@@ -181,7 +196,7 @@ const randomizeEvenly = (numPoints, box) => {
   }
 
   return coords;
-}
+};
 
 // Core implementation of ease-in/ease-out
 // Returns a value between 0 and 1
@@ -193,7 +208,7 @@ const ease = (input, period, flip = false) => {
   if (input >= period) {
     return flip ? 0 : 1;
   }
-  let cosResult = Math.cos(input * Math.PI / period);
+  let cosResult = Math.cos (input * Math.PI / period);
   if (flip) {
     cosResult = -cosResult;
   }
@@ -201,40 +216,40 @@ const ease = (input, period, flip = false) => {
 };
 
 const easeCircular = (input, period, flip = false) => {
-  if(input <= 0 || input >= period) {
+  if (input <= 0 || input >= period) {
     return flip ? 1 : 0;
   }
-  let cosResult = Math.cos(input * Math.PI / (period / 2));
-  if(flip) {
+  let cosResult = Math.cos (input * Math.PI / (period / 2));
+  if (flip) {
     cosResult = -cosResult;
   }
   return cosResult * -0.5 + 0.5;
 };
 
 const easeIn = (input, period) => {
-  return ease(input, period);
+  return ease (input, period);
 };
 const easeOut = (input, period) => {
-  return ease(input, period, true);
+  return ease (input, period, true);
 };
 const easeInOut = (input, period) => {
-  return easeCircular(input, period, false);
+  return easeCircular (input, period, false);
 };
 const easeOutIn = (input, period) => {
-  return easeCircular(input, period, true);
+  return easeCircular (input, period, true);
 };
 
 /**
  * Shuffles array in place. ES6 version
  * @param {Array} a items An array containing the items.
  */
-const rjShuffle = (a) => {
+const rjShuffle = a => {
   for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
+    const j = Math.floor (Math.random () * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
-}
+};
 
 const threeUtils = {
   splitNumber: splitNumber,
@@ -251,6 +266,6 @@ const threeUtils = {
   easeInOut: easeInOut,
   easeOutIn: easeOutIn,
   rjShuffle: rjShuffle,
-}
+};
 
 export default threeUtils;

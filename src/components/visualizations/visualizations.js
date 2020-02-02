@@ -1,7 +1,8 @@
 import React from 'react';
 import ThreeCity from './three-city';
 import DynamicGrid from './dynamic-grid';
-import BrokenGrid from './broken-grid';
+import RisingPillars from './rising-pillars';
+import threeUtils from './utils/three-utils';
 import vizStyles from '../../styles/visualizations.module.css';
 
 class Visualizations extends React.Component {
@@ -36,14 +37,14 @@ class Visualizations extends React.Component {
   }
 
   resetVisual () {
-    let nextVis = this.state.currentVisual + 1;
-    if (nextVis > 3) {
-      nextVis = 1;
-    }
+    // let nextVis = this.state.currentVisual + 1;
+    // if (nextVis > 3) {
+    //   nextVis = 1;
+    // }
     try {
       this.setState ({
         overlayOff: true,
-        currentVisual: nextVis,
+        currentVisual: threeUtils.getRandomInt(1, 10),
       });
     } catch (e) {
       console.log ("Couldn't update state properly");
@@ -52,22 +53,22 @@ class Visualizations extends React.Component {
 
   componentDidMount () {
     const reset = this.resetVisual;
-    const fade = this.fadeOut;
+    // const fade = this.fadeOut;
 
-    const time = 5000; // five seconds
-    const that = this;
+    // const time = 8000; // 8 seconds
+    // const that = this;
 
-    this.intervalId = window.setInterval (function () {
-      reset ();
-      that.timeoutId = setTimeout (function () {
-        fade ();
-      }, time - 500);
-    }, time);
+    // this.intervalId = window.setInterval (function () {
+    //   reset ();
+    //   that.timeoutId = setTimeout (function () {
+    //     fade ();
+    //   }, time - 500);
+    // }, time);
 
     reset ();
-    setTimeout (function () {
-      fade ();
-    }, time - 500);
+    // setTimeout (function () {
+    //   fade ();
+    // }, time - 500);
   }
 
   render () {
@@ -76,15 +77,21 @@ class Visualizations extends React.Component {
       ? `${vizStyles.vizOverlay} ${vizStyles.vizOverlayOff}`
       : `${vizStyles.vizOverlay}`;
 
-    switch (this.state.currentVisual) {
-      case 2:
-        visual = <DynamicGrid />;
-        break;
-      case 3:
-        visual = <BrokenGrid />;
-        break;
-      default:
-        visual = <ThreeCity />;
+    // switch (this.state.currentVisual) {
+    //   case 2:
+    //     visual = <DynamicGrid />;
+    //     break;
+    //   case 3:
+    //     visual = <RisingPillars />;
+    //     break;
+    //   default:
+    //     visual = <ThreeCity />;
+    // }
+    if (this.state.currentVisual < 7) {
+      visual = <RisingPillars />;
+    }
+    else if (this.state.currentVisual < 10) {
+      visual = <DynamicGrid />;
     }
 
     return (

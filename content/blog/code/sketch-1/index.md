@@ -5,6 +5,8 @@ date: 2019-03-31 12:00:00
 type: post
 category: software
 thumbnail: ./thumb.jpg
+options:
+  - hideDesc
 ---
 
 <style type="text/css">

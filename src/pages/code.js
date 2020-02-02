@@ -55,6 +55,7 @@ export const pageQuery = graphql`
             subtitle
             type
             target_url
+            options
             thumbnail {
               childImageSharp {
                 fluid(maxWidth: 800) {

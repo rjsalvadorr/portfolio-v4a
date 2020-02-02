@@ -116,7 +116,7 @@ class ThreeCity extends React.Component {
 
     // Update loop
     const cameraHeight = 18;
-    const rotationPeriod = 32;
+    const rotationPeriod = 44;
     const rotationRadius = 23;
     this.intervalId = window.setInterval (function () {
       const currentTime = Date.now () / 1000;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'gatsby';
+import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import mainStyles from '../styles/main.module.css';
 
@@ -11,6 +11,8 @@ const PostLinks = ({posts}) => {
         const title = node.frontmatter.title || node.fields.slug;
         const subtitle = node.frontmatter.subtitle || '';
         let thumb;
+        console.log(node.frontmatter);
+        const hideDescription = node.frontmatter.options && node.frontmatter.options.includes('hideDesc');
 
         if (
           node.frontmatter.thumbnail &&
@@ -83,11 +85,13 @@ const PostLinks = ({posts}) => {
               {thumb}
             </Link>
             <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
+              {!hideDescription &&
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: node.frontmatter.description || node.excerpt,
+                  }}
+                />
+              }
             </section>
           </article>
         );
