@@ -2,10 +2,11 @@ import React from 'react';
 import * as THREE from 'three';
 import sample from 'lodash/sample';
 import chroma from 'chroma-js';
-
 import utils from './utils/three-utils';
 import FuzzyGrid from './utils/fuzzy-grid';
 import { radialWave3 } from './utils/wave-utils';
+
+import vizStyles from "../../styles/rising-pillars.module.css"
 
 class RisingPillars extends React.Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class RisingPillars extends React.Component {
 
   render () {
     return (
-      <div className="rising-pillars-wrapper-wrapper">
+      <div className={`${vizStyles.wrapperClass}`}>
         <div
           className="rising-pillars-wrapper"
           ref={this.pillarsRef}
