@@ -68,7 +68,7 @@ class DynamicGridView extends React.Component {
       this.intervalId = null;
     }
 
-    if(this.state.grid) {
+    if(this.state.grid && typeof this.state.grid.applyFunc === "function") {
       this.intervalId = setInterval(() => {
         this.state.grid.applyFunc(this.updateGridUnit);
         this.state.grid.applyFunc(this.drawGridUnit);
